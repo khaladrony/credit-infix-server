@@ -1,43 +1,45 @@
-package com.rony.creditinfix.controllers.auth;
+package com.rony.creditinfix.controllers.financialInfo;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rony.creditinfix.models.ApiResponse;
-import com.rony.creditinfix.models.auth.UserDTO;
-import com.rony.creditinfix.services.auth.user.UserService;
+import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
+import com.rony.creditinfix.services.financialInfo.CompanyInfo.CompanyInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/financial-info/company-info")
+public class CompanyInfoController {
 
     @Autowired
     private MessageSource messageSource;
     @Autowired
-    private UserService userService;
+    private CompanyInfoService companyInfoService;
 
     /**
-     * Create User
+     * Create Company Info
      *
-     * @param userDTO
+     * @param companyInfoDTO
      * @return
      */
     @PostMapping("/add")
-    public ResponseEntity<Object> login(@RequestParam(value = "userDTO") String userDTO) {
+    @ApiIgnore
+    public ResponseEntity<Object> login(@RequestParam(value = "companyInfoDTO") String companyInfoDTO) {
 
         ApiResponse response = new ApiResponse(false);
 
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UserDTO reqModel = mapper.readValue(userDTO, UserDTO.class);
-            response.setData(userService.create(reqModel));
+            CompanyInfoDTO reqModel = mapper.readValue(companyInfoDTO, CompanyInfoDTO.class);
+            response.setData(companyInfoService.create(reqModel));
             response.setMessage(messageSource.getMessage("api.create.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -49,19 +51,20 @@ public class UserController {
 
 
     /**
-     * Update User
+     * Update Company Info
      *
-     * @param userDTO
+     * @param companyInfoDTO
      * @return
      */
     @PutMapping(value = "/update")
-    public ResponseEntity<Object> update(@RequestParam(value = "userDTO") String userDTO) {
+    @ApiIgnore
+    public ResponseEntity<Object> update(@RequestParam(value = "companyInfoDTO") String companyInfoDTO) {
         ApiResponse response = new ApiResponse();
         try {
             ObjectMapper mapper = new ObjectMapper();
-            UserDTO reqModel = mapper.readValue(userDTO, UserDTO.class);
+            CompanyInfoDTO reqModel = mapper.readValue(companyInfoDTO, CompanyInfoDTO.class);
             if (reqModel.getId() != null) {
-                response.setData(userService.update(reqModel.getId(), reqModel));
+                response.setData(companyInfoService.update(reqModel.getId(), reqModel));
                 response.setMessage(messageSource.getMessage("api.update.success", null, null));
                 return ResponseEntity.status(HttpStatus.OK).body(response);
             } else {
@@ -75,16 +78,17 @@ public class UserController {
     }
 
     /**
-     * Delete Role
+     * Delete Company Info
      *
      * @param id
      * @return
      */
     @DeleteMapping(value = "/delete")
+    @ApiIgnore
     public ResponseEntity<Object> delete(@RequestParam @Valid Long id) {
         ApiResponse response = new ApiResponse(false);
         try {
-            response.setData(userService.delete(id));
+            response.setData(companyInfoService.delete(id));
             response.setMessage(messageSource.getMessage("api.delete.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -96,7 +100,7 @@ public class UserController {
 
 
     /**
-     * Get Role list
+     * Get Company Info list
      *
      * @return
      */
@@ -104,7 +108,7 @@ public class UserController {
     public ResponseEntity<Object> getList() {
         ApiResponse response = new ApiResponse(false);
         try {
-            response.setData(userService.findAll());
+            response.setData(companyInfoService.findAll());
             response.setMessage(messageSource.getMessage("api.list.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);

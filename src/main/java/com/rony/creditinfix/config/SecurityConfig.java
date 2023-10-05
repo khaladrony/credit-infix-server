@@ -24,6 +24,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
+    private static final String[] PUBLIC_URLS = {
+            "/auth/login",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/webjars/**"
+    };
+
     @Autowired
     private JwtAuthenticationEntryPoint point;
 
@@ -40,7 +49,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .antMatchers("/home/**").authenticated()
-                        .antMatchers("/auth/login").permitAll()
+                        .antMatchers(PUBLIC_URLS).permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

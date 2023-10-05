@@ -1,27 +1,26 @@
 package com.rony.creditinfix.services.util;
 
-import com.rony.creditinfix.models.ExcelResponseModel;
-import com.rony.creditinfix.services.excel.ExcelService;
+import com.rony.creditinfix.models.financialInfo.FinancialInformationDTO;
+import com.rony.creditinfix.models.financialInfo.ManagementDTO;
+import com.rony.creditinfix.models.financialInfo.ShareholderDTO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.service.spi.ServiceException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 @Component
 public class ExcelHelper {
-
-//    @Autowired
-//    ExcelService excelService;
 
     private static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
     private XSSFWorkbook workbook;
@@ -29,177 +28,6 @@ public class ExcelHelper {
     public static boolean hasExcelFormat(MultipartFile file) {
         return TYPE.equals(file.getContentType());
     }
-
-
-
-
-
-    public List<ExcelResponseModel> excelToModel(InputStream is, String category, Double commission, String particulars) {
-        try {
-            workbook = new XSSFWorkbook(is);
-            XSSFSheet sheet = workbook.getSheetAt(0);
-            Iterator<Row> rows = sheet.iterator();
-
-            List<Integer> listOfInvalidAmnt = new ArrayList<>();
-            List<String> invalidAreaCodeList = new ArrayList<>();
-            List<Map> invalidAreaCodeMapList = new ArrayList<>();
-            List<ExcelResponseModel> bkashMoneyDetailsModels = new ArrayList<ExcelResponseModel>();
-            ExcelResponseModel bkashMoneyDetailsModel = null;
-
-            double commissionAmount;
-            int slNumber = 0;
-
-            while (rows.hasNext()) {
-                Row currentRow = rows.next();
-
-                // skip header
-                if (currentRow.getRowNum() == 0) {
-                    if (currentRow.getLastCellNum() != 2 || isRowEmpty(currentRow)) {
-                        throw new RuntimeException("Invalid Excel file for Bkash Money. \nPlease provide Area Code, Amount Only.");
-                    }
-                    continue;
-                }
-                // check if any row data deleted or row is empty
-                if (currentRow.getLastCellNum() < 0 || isRowEmpty(currentRow)) {
-                    break;
-                }
-
-                Cell currentCell;
-
-                if (currentRow.getCell(1) != null) {
-                    currentCell = currentRow.getCell(1);
-                    currentCell.setCellType(CellType.NUMERIC);
-
-                    if (currentCell.getNumericCellValue() <= 0) {
-                        listOfInvalidAmnt.add((currentRow.getRowNum() + 1));
-                    }
-
-                } else {
-                    listOfInvalidAmnt.add((currentRow.getRowNum() + 1));
-                    throw new RuntimeException("Invalid Amount at row no: [" + (currentRow.getRowNum() + 1) + "]");
-                }
-            }
-
-            if (listOfInvalidAmnt.size() > 0) {
-                throw new RuntimeException("Invalid Amount at row no: [" + String.join(listOfInvalidAmnt.toString(), ",") + "]");
-            }
-
-            rows = sheet.iterator();
-            while (rows.hasNext()) {
-                Row currentRow = rows.next();
-
-                // skip header
-                if (currentRow.getRowNum() == 0) {
-                    if (currentRow.getLastCellNum() != 2 || isRowEmpty(currentRow)) {
-                        throw new RuntimeException("Invalid Excel file for Bkash Money. \nPlease provide Area Code, Amount Only.");
-                    }
-                    continue;
-                }
-                // check if any row data deleted or row is empty
-                if (currentRow.getLastCellNum() < 0 || isRowEmpty(currentRow)) {
-                    break;
-                }
-
-                bkashMoneyDetailsModel = new ExcelResponseModel();
-
-                Cell currentCell = null;
-
-                /*if (currentRow.getCell(0) != null) {
-                    currentCell = currentRow.getCell(0);
-                    currentCell.setCellType(CellType.STRING);
-
-                    String cellValue = currentCell.getStringCellValue();
-
-                    if (cellValue.length() == 8 || cellValue.length() == 9) {
-                        projectSetup = projectSetupService.findByProjectRefCode(cellValue.substring(0, cellValue.length() - 5));
-                        if (projectSetup == null) {
-                            throw new RuntimeException("Invalid Project Code at row no: [" + (currentRow.getRowNum() + 1) + "]");
-                        } else {
-                            if (!projectSetup.getCategory().equalsIgnoreCase(category)) {
-                                throw new RuntimeException("Project Code must be of Same category as selected at row no: [" + (currentRow.getRowNum() + 1) + "]");
-                            }
-                        }
-
-                        areaCode = areaCurrentAccountCodeService.findByAreaCurrentAcCode(cellValue);
-                        if (areaCode == null) {
-                            // sort out invalid area code
-                            invalidAreaCodeList.add(cellValue);
-
-                            invalidAreaCodeMap.put("cellValue", cellValue);
-                            invalidAreaCodeMap.put("remarks", "No Such Area Code Found");
-                            invalidAreaCodeMap.put("rowNumber", (currentRow.getRowNum() + 1));
-                            invalidAreaCodeMap.put("domain", BkashMoneyMaster.class.newInstance());
-
-                            invalidAreaCodeMapList.add(invalidAreaCodeMap);
-//                            this.saveInvalidAreaCodeTmp(cellValue, (currentRow.getRowNum() + 1), BkashMoneyMaster.class.newInstance());
-
-                            continue;
-                        }
-
-                        bkashMoneyDetailsModel.setProjectSetup(projectSetup);
-                        bkashMoneyDetailsModel.setAreaCurrentAccCode(areaCode);
-
-                        String narration = "Received from " + areaCode.getName() + " [" + areaCode.getAreaCurrentAcCode() + "] through bKash Ltd. agt. " + particulars;
-                        bkashMoneyDetailsModel.setNarration(narration);
-
-                    } else {
-                        invalidAreaCodeList.add(cellValue);
-
-                        invalidAreaCodeMap.put("cellValue", cellValue);
-                        invalidAreaCodeMap.put("remarks", "No Such Area Code Found");
-                        invalidAreaCodeMap.put("rowNumber", (currentRow.getRowNum() + 1));
-                        invalidAreaCodeMap.put("domain", BkashMoneyMaster.class.newInstance());
-
-                        invalidAreaCodeMapList.add(invalidAreaCodeMap);
-//                        this.saveInvalidAreaCodeTmp(cellValue, (currentRow.getRowNum() + 1), BkashMoneyMaster.class.newInstance());
-
-                        continue;
-                    }
-                } else {
-                    throw new RuntimeException("Invalid Project RefCode at row no: [" + (currentRow.getRowNum() + 1) + "]");
-                }*/
-
-                /*if (currentRow.getCell(1) != null) {
-                    currentCell = currentRow.getCell(1);
-                    currentCell.setCellType(CellType.NUMERIC);
-
-                    bkashMoneyDetailsModel.setAmount(currentCell.getNumericCellValue());
-
-                    commissionAmount = (bkashMoneyDetailsModel.getAmount() * commission) / 100;
-
-                    bkashMoneyDetailsModel.setCommission((double) Math.round(commissionAmount));
-                    bkashMoneyDetailsModel.setNetAmount((double) Math.round(bkashMoneyDetailsModel.getAmount()) - Math.round(commissionAmount));
-
-                } else {
-                    throw new RuntimeException("Invalid Amount at row no: [" + (currentRow.getRowNum() + 1) + "]");
-                }
-
-                bkashMoneyDetailsModel.setSlNumber(++slNumber);
-                bkashMoneyDetailsModels.add(bkashMoneyDetailsModel);*/
-            }
-
-            workbook.close();
-
-//            if (invalidAreaCodeMapList.size() > 0) {
-//                this.saveInvalidAreaCodeTmp(invalidAreaCodeMapList);
-//            }
-//
-//            if (invalidAreaCodeList.size() > 0) {
-//                excelService.insertQueryForInvalidAreaCodeTmp(invalidAreaCodeList);
-//            }
-
-            return bkashMoneyDetailsModels;
-
-        } catch (IOException e) {
-            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
-        } catch (ServiceException e) {
-            e.printStackTrace();
-            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
-        } catch (Exception ex) {
-            throw new RuntimeException(ex.getMessage());
-        }
-    }
-
 
     private boolean isRowEmpty(Row row) {
         for (int c = row.getFirstCellNum(); c < row.getLastCellNum(); c++) {
@@ -210,9 +38,6 @@ public class ExcelHelper {
 
         return true;
     }
-
-
-
 
 
     private boolean isValueEmptyOrNA(String string) {
@@ -233,4 +58,170 @@ public class ExcelHelper {
         }
     }
 
-   }
+    private String getCellValueString(Cell cell) {
+        if (cell.getCellType().equals(CellType.NUMERIC)) {
+            return String.valueOf(cell.getNumericCellValue());
+        } else {
+            return cell.getStringCellValue();
+        }
+    }
+
+    public List<FinancialInformationDTO> excelToFinancialInformationDTO(InputStream is) {
+        try {
+            workbook = new XSSFWorkbook(is);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rows = sheet.iterator();
+
+            List<FinancialInformationDTO> financialInformationDTOs = new ArrayList<FinancialInformationDTO>();
+            FinancialInformationDTO financialInformationDTO = null;
+
+
+            while (rows.hasNext()) {
+                Row row = rows.next();
+                Iterator<Cell> cellIterator = row.iterator();
+                int cid = 0;
+                financialInformationDTO = new FinancialInformationDTO();
+                while (cellIterator.hasNext()) {
+                    Cell cell = cellIterator.next();
+
+                    switch (cid) {
+                        case 0:
+                            financialInformationDTO.setItemCode(cell.getStringCellValue());
+                            break;
+                        case 1:
+                            financialInformationDTO.setThirdYear(getCellValueString(cell));
+                            break;
+                        case 2:
+                            financialInformationDTO.setThirdYear(getCellValueString(cell));
+                            break;
+                        case 3:
+                            financialInformationDTO.setThirdYear(getCellValueString(cell));
+                            break;
+                        default:
+                            break;
+                    }
+                    cid++;
+                }
+
+                /*
+                 * Display the data in the 'Year' column of the table without any decimal places
+                 * */
+                if (financialInformationDTO.getItemCode().equalsIgnoreCase("Year")) {
+                    financialInformationDTO.setThirdYear(financialInformationDTO.getThirdYear().substring(0, 4));
+                    financialInformationDTO.setSecondYear(financialInformationDTO.getSecondYear().substring(0, 4));
+                    financialInformationDTO.setFirstYear(financialInformationDTO.getFirstYear().substring(0, 4));
+                }
+
+                financialInformationDTOs.add(financialInformationDTO);
+            }
+
+            workbook.close();
+
+            return financialInformationDTOs;
+
+        } catch (IOException e) {
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+
+    public List<ShareholderDTO> excelToShareholderDTO(InputStream is) {
+        try {
+            workbook = new XSSFWorkbook(is);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rows = sheet.iterator();
+            Row headerRow = null;
+
+            List<ShareholderDTO> shareholderDTOs = new ArrayList<ShareholderDTO>();
+            ShareholderDTO shareholderDTO = null;
+
+
+            while (rows.hasNext()) {
+                Row row = rows.next();
+                Iterator<Cell> cellIterator = row.iterator();
+                int i = 0;
+
+                if (row.getRowNum() == 0) {
+                    headerRow = row;
+                }
+
+                while (headerRow != null && cellIterator.hasNext() && row.getRowNum() > 0) {
+                    Cell cell = cellIterator.next();
+
+                    shareholderDTO = new ShareholderDTO();
+                    shareholderDTO.setItemCode(headerRow.getCell(i).getStringCellValue());
+                    shareholderDTO.setItemValue(getCellValueString(cell));
+                    shareholderDTO.setSequence(i + 1);
+                    shareholderDTOs.add(shareholderDTO);
+
+                    i++;
+                }
+            }
+
+            workbook.close();
+
+            return shareholderDTOs;
+
+        } catch (IOException e) {
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+    public List<ManagementDTO> excelToManagementDTO(InputStream is) {
+        try {
+            workbook = new XSSFWorkbook(is);
+            XSSFSheet sheet = workbook.getSheetAt(0);
+            Iterator<Row> rows = sheet.iterator();
+            Row headerRow = null;
+
+            List<ManagementDTO> managementDTOs = new ArrayList<>();
+            ManagementDTO managementDTO = null;
+
+            while (rows.hasNext()) {
+                Row row = rows.next();
+                Iterator<Cell> cellIterator = row.iterator();
+                int i = 0;
+
+                if (row.getRowNum() == 0) {
+                    headerRow = row;
+                }
+
+                while (headerRow != null && cellIterator.hasNext() && row.getRowNum() > 0) {
+                    Cell cell = cellIterator.next();
+
+                    managementDTO = new ManagementDTO();
+                    managementDTO.setItemCode(headerRow.getCell(i).getStringCellValue());
+                    managementDTO.setItemValue(getCellValueString(cell));
+                    managementDTO.setSequence(i + 1);
+                    managementDTOs.add(managementDTO);
+
+                    i++;
+                }
+            }
+
+            workbook.close();
+
+            return managementDTOs;
+
+        } catch (IOException e) {
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
+        } catch (Exception ex) {
+            throw new RuntimeException(ex.getMessage());
+        }
+    }
+
+
+}

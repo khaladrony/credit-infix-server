@@ -4,6 +4,7 @@ import com.rony.creditinfix.models.JwtRequest;
 import com.rony.creditinfix.models.JwtResponse;
 import com.rony.creditinfix.security.JwtHelper;
 import com.rony.creditinfix.services.JwtUserDetailsService;
+import com.rony.creditinfix.services.util.ShowAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
+@ShowAPI
 @RestController
 @CrossOrigin
 @RequestMapping("/auth")
