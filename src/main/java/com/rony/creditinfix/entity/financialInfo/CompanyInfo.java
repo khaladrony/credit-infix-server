@@ -35,12 +35,6 @@ public class CompanyInfo extends CommonColumn {
     @Column(name = "website")
     private String website;
 
-    @Column(name = "faxNo")
-    private String faxNo;
-
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "industry_type")
     private String industryType;
 
@@ -55,9 +49,6 @@ public class CompanyInfo extends CommonColumn {
 
     @Column(name = "country")
     private String country;
-
-    @Column(name = "state")
-    private String state;
 
     @Column(name = "business_scale")
     private String businessScale;
@@ -99,6 +90,12 @@ public class CompanyInfo extends CommonColumn {
     @Column(name = "no_of_judicial_record")
     private String noOfJudicialRecord;
 
+    @Column(name = "maximum_credit")
+    private String maximumCredit;
+
+    @Column(name = "credit_rating")
+    private String creditRating;
+
     public CompanyInfo(CompanyInfoDTO companyInfoDTO){
         this.setId(companyInfoDTO.getId());
         this.setVersion(companyInfoDTO.getVersion());
@@ -107,14 +104,11 @@ public class CompanyInfo extends CommonColumn {
         this.setOperationAddress(companyInfoDTO.getOperationAddress());
         this.setTelephoneNumber(companyInfoDTO.getTelephoneNumber());
         this.setWebsite(companyInfoDTO.getWebsite());
-        this.setFaxNo(companyInfoDTO.getFaxNo());
-        this.setEmail(companyInfoDTO.getEmail());
         this.setIndustryType(companyInfoDTO.getIndustryType());
         this.setYearEstablished(companyInfoDTO.getYearEstablished());
         this.setAgeOfBusiness(companyInfoDTO.getAgeOfBusiness());
         this.setBusinessType(companyInfoDTO.getBusinessType());
         this.setCountry(companyInfoDTO.getCountry());
-        this.setState(companyInfoDTO.getState());
         this.setBusinessScale(companyInfoDTO.getBusinessScale());
         this.setPaymentPractices(companyInfoDTO.getPaymentPractices());
         this.setListedStatus(companyInfoDTO.getListedStatus());
@@ -128,5 +122,7 @@ public class CompanyInfo extends CommonColumn {
         this.setLegalStatus(companyInfoDTO.getLegalStatus());
         this.setNoOfCharge(companyInfoDTO.getNoOfCharge());
         this.setNoOfJudicialRecord(companyInfoDTO.getNoOfJudicialRecord());
+        this.setMaximumCredit(companyInfoDTO.getMaximumCredit());
+        this.setCreditRating(companyInfoDTO.getCreditRating());
     }
 }

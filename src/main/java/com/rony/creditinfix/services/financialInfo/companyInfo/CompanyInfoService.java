@@ -1,4 +1,4 @@
-package com.rony.creditinfix.services.financialInfo.CompanyInfo;
+package com.rony.creditinfix.services.financialInfo.companyInfo;
 
 import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.services.AbstractService;

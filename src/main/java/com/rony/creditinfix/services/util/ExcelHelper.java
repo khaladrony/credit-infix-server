@@ -92,10 +92,10 @@ public class ExcelHelper {
                             financialInformationDTO.setThirdYear(getCellValueString(cell));
                             break;
                         case 2:
-                            financialInformationDTO.setThirdYear(getCellValueString(cell));
+                            financialInformationDTO.setSecondYear(getCellValueString(cell));
                             break;
                         case 3:
-                            financialInformationDTO.setThirdYear(getCellValueString(cell));
+                            financialInformationDTO.setFirstYear(getCellValueString(cell));
                             break;
                         default:
                             break;

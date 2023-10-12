@@ -17,14 +17,14 @@ public class CompanyInfoDTO {
     private String operationAddress;
     private String telephoneNumber;
     private String website;
-    private String faxNo;
-    private String email;
+//    private String faxNo;
+//    private String email;
     private String industryType;
     private String yearEstablished;
     private String ageOfBusiness;
     private String businessType;
     private String country;
-    private String state;
+//    private String state;
     private String businessScale;
     private String paymentPractices;
     private String listedStatus;
@@ -38,6 +38,8 @@ public class CompanyInfoDTO {
     private String legalStatus;
     private String noOfCharge;
     private String noOfJudicialRecord;
+    private String maximumCredit;
+    private String creditRating;
 
     public CompanyInfoDTO(CompanyInfo companyInfo){
         this.setId(companyInfo.getId());
@@ -47,14 +49,11 @@ public class CompanyInfoDTO {
         this.setOperationAddress(companyInfo.getOperationAddress());
         this.setTelephoneNumber(companyInfo.getTelephoneNumber());
         this.setWebsite(companyInfo.getWebsite());
-        this.setFaxNo(companyInfo.getFaxNo());
-        this.setEmail(companyInfo.getEmail());
         this.setIndustryType(companyInfo.getIndustryType());
         this.setYearEstablished(companyInfo.getYearEstablished());
         this.setAgeOfBusiness(companyInfo.getAgeOfBusiness());
         this.setBusinessType(companyInfo.getBusinessType());
         this.setCountry(companyInfo.getCountry());
-        this.setState(companyInfo.getState());
         this.setBusinessScale(companyInfo.getBusinessScale());
         this.setPaymentPractices(companyInfo.getPaymentPractices());
         this.setListedStatus(companyInfo.getListedStatus());
@@ -68,5 +67,7 @@ public class CompanyInfoDTO {
         this.setLegalStatus(companyInfo.getLegalStatus());
         this.setNoOfCharge(companyInfo.getNoOfCharge());
         this.setNoOfJudicialRecord(companyInfo.getNoOfJudicialRecord());
+        this.setMaximumCredit(companyInfo.getMaximumCredit());
+        this.setCreditRating(companyInfo.getCreditRating());
     }
 }

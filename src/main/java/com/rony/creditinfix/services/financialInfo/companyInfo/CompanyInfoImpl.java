@@ -1,4 +1,4 @@
-package com.rony.creditinfix.services.financialInfo.CompanyInfo;
+package com.rony.creditinfix.services.financialInfo.companyInfo;
 
 
 import com.rony.creditinfix.entity.financialInfo.CompanyInfo;
