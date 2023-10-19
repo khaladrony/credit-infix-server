@@ -4,16 +4,17 @@ package com.rony.creditinfix.services.financialInfo.registrationDetail;
 import com.rony.creditinfix.entity.financialInfo.RegistrationDetail;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.RegistrationDetailDTO;
+import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
 import com.rony.creditinfix.repository.financialInfo.RegistrationDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class RegistrationDetailImpl implements RegistrationDetailService{
+public class RegistrationDetailImpl implements RegistrationDetailService {
 
     @Autowired
     RegistrationDetailRepository registrationDetailRepository;
@@ -38,6 +39,50 @@ public class RegistrationDetailImpl implements RegistrationDetailService{
             registrationDetailDTOS.add(registrationDetailDTO);
         }
         return registrationDetailDTOS;
+    }
+
+    @Override
+    public List<List<ReportDataDTO>> findAllByCompanyInfoIdForReport(Long companyInfoId) {
+        List<RegistrationDetailDTO> registrationDetailDTOS = this.findAllByCompanyInfoId(companyInfoId);
+
+        Map<Integer, List<RegistrationDetailDTO>> regDetailByItem = new HashMap<>();
+        List<ReportDataDTO> rows = null;
+        List<List<ReportDataDTO>> data = new ArrayList<>();
+
+        regDetailByItem = registrationDetailDTOS.stream()
+                .collect(Collectors.groupingBy(RegistrationDetailDTO::getSequence));
+
+        for (List<RegistrationDetailDTO> list : regDetailByItem.values()) {
+            boolean isFirstData = true;
+            for (RegistrationDetailDTO detailDTO : list) {
+                if (isFirstData && list.size() > 1
+                        && !detailDTO.getItem().equals("")
+                        && !detailDTO.getSubItem().equals("")
+                        && !detailDTO.getItemValue().equals("")) {
+                    rows = new ArrayList<>();
+                    rows.add(new ReportDataDTO(list.size(), 0, detailDTO.getItem()));
+                    rows.add(new ReportDataDTO(1, 0, detailDTO.getSubItem()));
+                    rows.add(new ReportDataDTO(1, 0, detailDTO.getItemValue()));
+                    data.add(rows);
+                    isFirstData = false;
+                } else if (detailDTO.getSubItem().equals("") && list.size() == 1) {
+                    rows = new ArrayList<>();
+                    rows.add(new ReportDataDTO(1, 0, detailDTO.getItem()));
+                    rows.add(new ReportDataDTO(0, 2, detailDTO.getItemValue()));
+                    data.add(rows);
+
+                } else {
+                    rows = new ArrayList<>();
+                    rows.add(new ReportDataDTO(1, 0, detailDTO.getSubItem()));
+                    rows.add(new ReportDataDTO(1, 0, detailDTO.getItemValue()));
+                    data.add(rows);
+                }
+
+            }
+        }
+
+
+        return data;
     }
 
     @Override

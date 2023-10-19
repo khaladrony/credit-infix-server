@@ -29,11 +29,15 @@ public class CorporateStructure extends CommonColumn {
     @Column(name = "item_value")
     private String itemValue;
 
+    @Column(name = "sequence")
+    private int sequence;
+
     public CorporateStructure(CorporateStructureDTO corporateStructureDTO) {
         this.setId(corporateStructureDTO.getId());
         this.setVersion(corporateStructureDTO.getVersion());
         this.setCompanyInfo(corporateStructureDTO.getCompanyInfo());
         this.setItemCode(corporateStructureDTO.getItemCode());
         this.setItemValue(corporateStructureDTO.getItemValue());
+        this.setSequence(corporateStructureDTO.getSequence());
     }
 }

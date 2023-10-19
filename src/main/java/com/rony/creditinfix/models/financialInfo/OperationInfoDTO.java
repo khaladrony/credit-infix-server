@@ -1,7 +1,6 @@
 package com.rony.creditinfix.models.financialInfo;
 
 import com.rony.creditinfix.entity.financialInfo.CompanyInfo;
-import com.rony.creditinfix.entity.financialInfo.Location;
 import com.rony.creditinfix.entity.financialInfo.OperationInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +16,7 @@ public class OperationInfoDTO {
     private CompanyInfo companyInfo;
     private String itemCode;
     private String itemValue;
+    private int sequence;
 
     public OperationInfoDTO(OperationInfo operationInfo){
         this.setId(operationInfo.getId());
@@ -24,5 +24,6 @@ public class OperationInfoDTO {
         this.setCompanyInfo(operationInfo.getCompanyInfo());
         this.setItemCode(operationInfo.getItemCode());
         this.setItemValue(operationInfo.getItemValue());
+        this.setSequence(operationInfo.getSequence());
     }
 }

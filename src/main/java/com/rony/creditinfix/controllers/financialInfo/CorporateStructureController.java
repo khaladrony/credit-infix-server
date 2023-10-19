@@ -83,4 +83,25 @@ public class CorporateStructureController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
+
+    /**
+     * Get Corporate Structure for report
+     *
+     * @param companyInfoId
+     * @return
+     */
+    @RequestMapping(value = "/report-data", method = RequestMethod.GET)
+    public ResponseEntity<Object> getListForReport(@RequestParam @Valid Long companyInfoId) {
+        ApiResponse response = new ApiResponse(false);
+        try {
+            response.setData(corporateStructureService.findAllByCompanyInfoIdForReport(companyInfoId));
+            response.setMessage(messageSource.getMessage("api.list.success", null, null));
+            response.setSuccess(true);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 }

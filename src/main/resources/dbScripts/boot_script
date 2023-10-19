@@ -99,3 +99,23 @@ INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at,
 INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, '2023-10-11 19:45:26.260000', null, '2023-10-11 19:45:26.260000', null, 0, 'Auditor', 'Name: BDO Partners', 1);
 INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, '2023-10-11 19:45:26.262000', null, '2023-10-11 19:45:26.262000', null, 0, 'Auditor', 'Address: Charter House” No. 65/2, Sir. Chittampalam A. Gardiner Mawatha,
         Colombo–2, Sri Lanka', 1);
+
+===============================================(summary_opinion)
+INSERT INTO credit_infix.summary_opinion (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, '2023-10-18 10:23:42.530000', null, '2023-10-18 10:23:42.530000', null, 0, 'Summary:', 'Established in 2017 as a Private Limited Liability Company, subject has been in
+operation for 06 years under the present name style of CHIEFWAY
+KATUNAYAKE (PRIVATE) LIMITED.
+Mr. Wickramasinghe Senanayake Appuhamilage Vipul Abayanga Senanayake,
+the Managing Director of the company is responsible for its overall
+management, strategic planning and business developments.
+Subject is engaged in Manufacture, Import and Export of apparel product. It’s
+products includes wide range of blazers, coats, jackets, pants and skirts etc.
+Market reputation is excellent and no detrimental information was found
+during the course of investigation.
+Payment records are satisfactory and a search of public records and
+bankruptcy courts returned no derogatory information or record of the
+company filing a bankruptcy petition.
+Litigation status is found to be clear. No payment default cases are found
+registered with Court of local jurisdiction.', 1);
+INSERT INTO credit_infix.summary_opinion (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, '2023-10-18 10:23:42.579000', null, '2023-10-18 10:23:42.580000', null, 0, 'Opinion:', 'Based on Subject''s Score Factor, Subject has been given a credit rating of C.
+The company is acceptable for normal business engagements. Risk factors are
+moderate level.', 1);

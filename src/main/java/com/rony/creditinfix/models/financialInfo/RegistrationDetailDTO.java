@@ -20,6 +20,7 @@ public class RegistrationDetailDTO {
     private String itemValue;
     private boolean isRowSpan;
     private boolean isColSpan;
+    private int sequence;
 
     public RegistrationDetailDTO(RegistrationDetail registrationDetail){
         this.setId(registrationDetail.getId());
@@ -30,6 +31,7 @@ public class RegistrationDetailDTO {
         this.setItemValue(registrationDetail.getItemValue());
         this.setRowSpan(registrationDetail.isRowSpan());
         this.setColSpan(registrationDetail.isColSpan());
+        this.setSequence(registrationDetail.getSequence());
 
     }
 }

@@ -39,6 +39,9 @@ public class RegistrationDetail extends CommonColumn {
     @Column(name = "is_col_span")
     private boolean isColSpan;
 
+    @Column(name = "sequence")
+    private int sequence;
+
     public RegistrationDetail(RegistrationDetailDTO registrationDetailDTO){
         this.setId(registrationDetailDTO.getId());
         this.setVersion(registrationDetailDTO.getVersion());
@@ -48,6 +51,7 @@ public class RegistrationDetail extends CommonColumn {
         this.setItemValue(registrationDetailDTO.getItemValue());
         this.setRowSpan(registrationDetailDTO.isRowSpan());
         this.setColSpan(registrationDetailDTO.isColSpan());
+        this.setSequence(registrationDetailDTO.getSequence());
 
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderDetailService extends AbstractService<OrderDetailDTO> {
 
-    public List<OrderDetailDTO> saveAll(List<OrderDetailDTO> orderDetailDTOS, Long companyInfoId);
+    List<OrderDetailDTO> saveAll(List<OrderDetailDTO> orderDetailDTOS, Long companyInfoId);
 
-    public List<OrderDetailDTO> findAllByCompanyInfoId(Long companyInfoId);
+    List<OrderDetailDTO> findAllByCompanyInfoId(Long companyInfoId);
 }

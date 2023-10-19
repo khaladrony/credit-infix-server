@@ -16,6 +16,7 @@ public class CorporateStructureDTO {
     private CompanyInfo companyInfo;
     private String itemCode;
     private String itemValue;
+    private int sequence;
 
     public CorporateStructureDTO(CorporateStructure corporateStructure) {
         this.setId(corporateStructure.getId());
@@ -23,5 +24,6 @@ public class CorporateStructureDTO {
         this.setCompanyInfo(corporateStructure.getCompanyInfo());
         this.setItemCode(corporateStructure.getItemCode());
         this.setItemValue(corporateStructure.getItemValue());
+        this.setSequence(corporateStructure.getSequence());
     }
 }

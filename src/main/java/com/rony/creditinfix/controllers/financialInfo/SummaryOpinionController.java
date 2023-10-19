@@ -6,8 +6,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.rony.creditinfix.models.ApiResponse;
-import com.rony.creditinfix.models.financialInfo.OperationInfoDTO;
-import com.rony.creditinfix.services.financialInfo.operationInfo.OperationInfoService;
+import com.rony.creditinfix.models.financialInfo.OrderDetailDTO;
+import com.rony.creditinfix.models.financialInfo.SummaryOpinionDTO;
+import com.rony.creditinfix.services.financialInfo.summaryOpinion.SummaryOpinionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -20,25 +21,24 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/financial-info/operation-info")
-public class OperationInfoController {
-
+@RequestMapping("/financial-info/summary-opinion")
+public class SummaryOpinionController {
     @Autowired
     private MessageSource messageSource;
     @Autowired
-    private OperationInfoService operationInfoService;
+    private SummaryOpinionService summaryOpinionService;
 
 
     /**
-     * Create Operation Info List
+     * Create Summary Opinion
      *
-     * @param operationInfoList
+     * @param summaryOpinionList
      * @param companyInfoId
      * @return
      */
     @PostMapping("/save")
     @ApiIgnore
-    public ResponseEntity<Object> login(@RequestParam(value = "operationInfoList") String operationInfoList,
+    public ResponseEntity<Object> login(@RequestParam(value = "summaryOpinionList") String summaryOpinionList,
                                         @RequestParam(value = "companyInfoId") String companyInfoId) {
 
         ApiResponse response = new ApiResponse(false);
@@ -47,11 +47,10 @@ public class OperationInfoController {
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-            List<OperationInfoDTO> reqModel =
-                    mapper.readValue(operationInfoList, new TypeReference<List<OperationInfoDTO>>() {
-                    });
+            List<SummaryOpinionDTO> reqModel = mapper.readValue(summaryOpinionList, new TypeReference<List<SummaryOpinionDTO>>() {
+            });
 
-            response.setData(operationInfoService.saveAll(reqModel, Long.parseLong(companyInfoId)));
+            response.setData(summaryOpinionService.saveAll(reqModel, Long.parseLong(companyInfoId)));
             response.setMessage(messageSource.getMessage("api.create.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -63,7 +62,7 @@ public class OperationInfoController {
 
 
     /**
-     * Get Operation Info List
+     * Get Summary Opinion List
      *
      * @param companyInfoId
      * @return
@@ -72,27 +71,7 @@ public class OperationInfoController {
     public ResponseEntity<Object> getList(@RequestParam @Valid Long companyInfoId) {
         ApiResponse response = new ApiResponse(false);
         try {
-            response.setData(operationInfoService.findAllByCompanyInfoId(companyInfoId));
-            response.setMessage(messageSource.getMessage("api.list.success", null, null));
-            response.setSuccess(true);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            response.setMessage(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-
-    /**
-     * Get Operation Info for report
-     *
-     * @param companyInfoId
-     * @return
-     */
-    @RequestMapping(value = "/report-data", method = RequestMethod.GET)
-    public ResponseEntity<Object> getListForReport(@RequestParam @Valid Long companyInfoId) {
-        ApiResponse response = new ApiResponse(false);
-        try {
-            response.setData(operationInfoService.findAllByCompanyInfoIdForReport(companyInfoId));
+            response.setData(summaryOpinionService.findAllByCompanyInfoId(companyInfoId));
             response.setMessage(messageSource.getMessage("api.list.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);

@@ -29,11 +29,15 @@ public class OperationInfo  extends CommonColumn {
     @Column(name = "item_value")
     private String itemValue;
 
+    @Column(name = "sequence")
+    private int sequence;
+
     public OperationInfo(OperationInfoDTO operationInfoDTO){
         this.setId(operationInfoDTO.getId());
         this.setVersion(operationInfoDTO.getVersion());
         this.setCompanyInfo(operationInfoDTO.getCompanyInfo());
         this.setItemCode(operationInfoDTO.getItemCode());
         this.setItemValue(operationInfoDTO.getItemValue());
+        this.setSequence(operationInfoDTO.getSequence());
     }
 }
