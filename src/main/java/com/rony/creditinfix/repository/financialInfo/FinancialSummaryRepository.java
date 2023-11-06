@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface FinancialSummaryRepository extends JpaRepository<FinancialSummary, Long> {
 
-    public List<FinancialSummary> findAllByCompanyInfoId(Long id);
+    List<FinancialSummary> findAllByCompanyInfoId(Long id);
 }

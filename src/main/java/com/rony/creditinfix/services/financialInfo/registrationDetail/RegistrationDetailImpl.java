@@ -1,10 +1,12 @@
 package com.rony.creditinfix.services.financialInfo.registrationDetail;
 
 
+import com.rony.creditinfix.entity.financialInfo.FinancialSummary;
 import com.rony.creditinfix.entity.financialInfo.RegistrationDetail;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.RegistrationDetailDTO;
 import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
+import com.rony.creditinfix.repository.financialInfo.FinancialSummaryRepository;
 import com.rony.creditinfix.repository.financialInfo.RegistrationDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,8 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
 
     @Autowired
     RegistrationDetailRepository registrationDetailRepository;
+    @Autowired
+    FinancialSummaryRepository financialSummaryRepository;
 
     @Override
     public List<RegistrationDetailDTO> saveAll(List<RegistrationDetailDTO> registrationDetailDTOS, Long companyInfoId) {
@@ -44,6 +48,8 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
     @Override
     public List<List<ReportDataDTO>> findAllByCompanyInfoIdForReport(Long companyInfoId) {
         List<RegistrationDetailDTO> registrationDetailDTOS = this.findAllByCompanyInfoId(companyInfoId);
+
+        this.setFinancialData(registrationDetailDTOS, companyInfoId);
 
         Map<Integer, List<RegistrationDetailDTO>> regDetailByItem = new HashMap<>();
         List<ReportDataDTO> rows = null;
@@ -113,5 +119,28 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
     @Override
     public List<RegistrationDetailDTO> findAll() {
         return null;
+    }
+
+    private void setFinancialData(List<RegistrationDetailDTO> registrationDetailDTOS, Long companyInfoId) {
+
+        List<FinancialSummary> financialSummaryList = financialSummaryRepository.findAllByCompanyInfoId(companyInfoId);
+
+        List<RegistrationDetailDTO> registrationDetailDTOList = registrationDetailDTOS.stream()
+                .filter(obj -> obj.getItem().equalsIgnoreCase("Capital:"))
+                .collect(Collectors.toList());
+
+        int i = 0, j = 0;
+        for (RegistrationDetailDTO detailDTO : registrationDetailDTOList) {
+            for (FinancialSummary finSummary : financialSummaryList) {
+                if (i == j) {
+                    detailDTO.setSubItem(finSummary.getItemCode());
+                    detailDTO.setItemValue(String.valueOf(finSummary.getAmount()));
+                    break;
+                }
+                j++;
+            }
+            i++;
+            j = 0;
+        }
     }
 }
