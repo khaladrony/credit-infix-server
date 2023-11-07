@@ -32,7 +32,7 @@ public class CompanyInfoController {
      */
     @PostMapping("/add")
     @ApiIgnore
-    public ResponseEntity<Object> login(@RequestParam(value = "companyInfoDTO") String companyInfoDTO) {
+    public ResponseEntity<Object> save(@RequestParam(value = "companyInfoDTO") String companyInfoDTO) {
 
         ApiResponse response = new ApiResponse(false);
 

@@ -1,0 +1,360 @@
+
+# ================================================(financial_summary)
+-- INSERT INTO credit_infix.financial_summary (id, created_at, created_by, updated_at, updated_by, version, amount, comments, currency, item_code, company_info_id) VALUES (1, null, null, '2023-10-09 16:16:17.557000', null, 15, 900000, 'The company is okay for normal business engagements under usual trade terms.', 'USD', 'Authorized Capital', 1);
+-- INSERT INTO credit_infix.financial_summary (id, created_at, created_by, updated_at, updated_by, version, amount, comments, currency, item_code, company_info_id) VALUES (2, null, null, '2023-10-09 16:16:17.558000', null, 15, 400000, 'The company is okay for normal business engagements under usual trade terms.', 'USD', 'Paid Up Capital', 1);
+-- INSERT INTO credit_infix.financial_summary (id, created_at, created_by, updated_at, updated_by, version, amount, comments, currency, item_code, company_info_id) VALUES (3, null, null, '2023-10-09 16:16:17.559000', null, 15, 200000, 'The company is okay for normal business engagements under usual trade terms.', 'USD', 'Each Share Value', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_financial_summary;
+CREATE PROCEDURE insert_financial_summary(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  DECLARE _comments VARCHAR(100);
+  SET _comments = 'The company is okay for normal business engagements under usual trade terms.';
+
+  INSERT INTO credit_infix.financial_summary (created_at, created_by, updated_at, updated_by, version, amount,
+                                              comments, currency, item_code, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 0, _comments, '', 'Authorized Capital', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 0, _comments, '', 'Paid Up Capital', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 0, _comments, '', 'Each Share Value', companyInfoId);
+
+END &&
+DELIMITER ;
+
+
+# ================================================(risk_profile)
+-- INSERT INTO credit_infix.risk_profile (id, created_at, created_by, updated_at, updated_by, version, item_code, percentage, status, company_info_id) VALUES (1, null, null, '2023-10-10 10:36:38.713000', null, 7, 'Age / Operation', 30, 'Moderate', 1);
+-- INSERT INTO credit_infix.risk_profile (id, created_at, created_by, updated_at, updated_by, version, item_code, percentage, status, company_info_id) VALUES (2, null, null, '2023-10-10 10:36:38.714000', null, 7, 'Management', 70, 'Good', 1);
+-- INSERT INTO credit_infix.risk_profile (id, created_at, created_by, updated_at, updated_by, version, item_code, percentage, status, company_info_id) VALUES (3, null, null, '2023-10-10 10:36:38.715000', null, 7, 'Finance', 70, 'Excellent', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_risk_profile;
+CREATE PROCEDURE insert_risk_profile(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.risk_profile (created_at, created_by, updated_at, updated_by, version, item_code,
+                                         percentage, status, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Age / Operation', 0, '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Management', 0, '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Finance', 0, '', companyInfoId);
+
+END &&
+DELIMITER ;
+
+# ===============================================(order_detail)
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, null, null, '2023-10-09 16:18:24.858000', null, 9, 'Name Given:', 'Chiefway Katunayake (Pvt) Limited', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, null, null, '2023-10-09 16:18:24.859000', null, 9, 'Address Given:', 'Ring Road 3, Phase II. E.P.Z. Katunayake. 11450. Sri Lanka, Katunayake 10500, Sri Lanka', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, null, null, '2023-10-09 16:18:24.861000', null, 9, 'Tel No Given:', 'NilNilNilNil', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, null, null, '2023-10-09 16:18:24.862000', null, 9, 'Website address:', 'Nil', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (5, null, null, '2023-10-09 16:18:24.863000', null, 9, 'Fax No Given:', 'Nil', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (6, null, null, '2023-10-09 16:18:24.864000', null, 9, 'Other Details:', 'Date of Incorporation: 31/03/2017, Company No.: PV 121177', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (7, null, null, '2023-10-09 16:18:24.865000', null, 9, 'Investigation Record:', 'Interviewee: Mr. Tharushi; Job Title: Human Resources & Administration
+--         Officer Tel: +94 112252542; Investigation Way: Telephone Interview', 1);
+-- INSERT INTO credit_infix.order_detail (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (8, null, null, '2023-10-09 16:18:24.865000', null, 9, 'Investigation Note:', 'The SBE’s inquiry name is inaccurate and Reg. Number, date of incorporation
+--         with address is accurate.', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_order_detail;
+CREATE PROCEDURE insert_order_detail(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.order_detail (created_at, created_by, updated_at, updated_by, version, item_code,
+                                         item_value, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Name Given:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Address Given:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Tel No Given:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Website address:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Fax No Given:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Other Details:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Investigation Record:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Investigation Note:', '', companyInfoId);
+
+
+END &&
+DELIMITER ;
+
+# ===============================================(registration_detail)
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (1, '2023-10-09 18:24:13.905000', null, '2023-10-09 18:24:13.905000', null, 0, false, false, 'Registration Information :', '31st March 2017', 'Registration Date', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (2, '2023-10-09 18:24:13.950000', null, '2023-10-09 18:24:13.950000', null, 0, false, true, 'Registration Information :', 'AAD44882', 'Company Registration No', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (3, '2023-10-09 18:24:13.958000', null, '2023-10-09 18:24:13.958000', null, 0, false, true, 'Registration Information :', 'NA', 'Business Identification No(BIN)', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (4, '2023-10-09 18:24:13.963000', null, '2023-10-09 18:24:13.963000', null, 0, false, true, 'Registration Information :', 'NA', 'Import Registration Certificate No (IRC):', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (5, '2023-10-09 18:24:13.967000', null, '2023-10-09 18:24:13.967000', null, 0, false, true, 'Registration Information :', 'NA', 'Tax Identification No (TIN):', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (6, '2023-10-09 18:24:13.970000', null, '2023-10-09 18:24:13.970000', null, 0, false, true, 'Registration Information :', 'NA', 'BGMEA Reg. No:', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (7, '2023-10-09 18:24:13.973000', null, '2023-10-09 18:24:13.973000', null, 0, false, false, 'Capital:', 'LKR 696,190,000.00', 'Share Capital:', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (8, '2023-10-09 18:24:13.976000', null, '2023-10-09 18:24:13.976000', null, 0, false, false, 'Capital:', 'LKR 69,619,000.00', 'Number of Share:', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (9, '2023-10-09 18:24:13.979000', null, '2023-10-09 18:24:13.979000', null, 0, false, false, 'Capital:', 'NA', 'Per Share Value:', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (10, '2023-10-09 18:24:13.982000', null, '2023-10-09 18:24:13.982000', null, 0, false, false, 'Legal Status:', 'Private Limited Liability Company', '', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (11, '2023-10-09 18:24:13.985000', null, '2023-10-09 18:24:13.985000', null, 0, false, false, 'Secretary', 'Corporate Services (Private) Limited Address: No. 216, De Saram Place, Colombo–10, Sri Lanka', '', 1);
+-- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (12, '2023-10-09 18:24:13.988000', null, '2023-10-09 18:24:13.988000', null, 0, false, false, 'Issuing Authority:', 'The Department of the Registrar of Companies, Sri Lanka.', '', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_registration_detail;
+CREATE PROCEDURE insert_registration_detail(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.registration_detail (created_at, created_by, updated_at, updated_by, version,
+                                                is_col_span, is_row_span, item, item_value, sub_item, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '31st March 2017',
+          'Registration Date', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '', 'Company Registration No',
+          companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
+          'Business Identification No(BIN)', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
+          'Import Registration Certificate No (IRC):', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
+          'Tax Identification No (TIN):', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '', 'BGMEA Reg. No:',
+          companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Share Capital:', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Number of Share:', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Per Share Value:', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Legal Status:', '', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Secretary', '', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Issuing Authority:', '', '', companyInfoId);
+
+END &&
+DELIMITER ;
+
+
+# ===============================================(location)
+-- INSERT INTO credit_infix.location (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, '2023-10-11 10:18:18.961000', null, '2023-10-11 10:18:18.961000', null, 0, 'Factory Address:', 'Ring Road 3, Phase II, EPZ, Katunayake, Sri Lanka', 1);
+-- INSERT INTO credit_infix.location (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, '2023-10-11 10:18:18.996000', null, '2023-10-11 10:18:18.996000', null, 0, 'Branch Office:', 'NA', 1);
+-- INSERT INTO credit_infix.location (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, '2023-10-11 10:18:18.998000', null, '2023-10-11 10:18:18.998000', null, 0, 'Warehouses Address:', 'Ring Road 3, Phase II, EPZ, Katunayake, Sri Lanka', 1);
+-- INSERT INTO credit_infix.location (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, '2023-10-11 10:18:19.001000', null, '2023-10-11 10:18:19.001000', null, 0, 'Previous Address:', 'NA', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_location;
+CREATE PROCEDURE insert_location(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.location (created_at, created_by, updated_at, updated_by, version, item_code, item_value,
+                                     company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Factory Address:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Branch Office:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Warehouses Address:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Previous Address:', '', companyInfoId);
+
+END &&
+DELIMITER ;
+
+
+# ===============================================(operation_info)
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, '2023-10-11 12:43:37.942000', null, '2023-10-11 12:43:37.942000', null, 0, 'Activity Status :', 'Active', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, '2023-10-11 12:43:37.951000', null, '2023-10-11 12:43:37.951000', null, 0, 'Activities:', 'Manufacture, Import and Export', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, '2023-10-11 12:43:37.955000', null, '2023-10-11 12:43:37.955000', null, 0, 'NAICS Code :', '315240 Womens, Girls, and Infants Cut and Sew Apparel Manufacturing 315220 Mens and Boys Cut and Sew Apparel Manufacturing', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, '2023-10-11 12:43:37.959000', null, '2023-10-11 12:43:37.959000', null, 0, 'Items Dealing In:', 'Apparel products', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (5, '2023-10-11 12:43:37.963000', null, '2023-10-11 12:43:37.963000', null, 0, 'Export/Import Permit:', 'Yes', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (6, '2023-10-11 12:43:37.966000', null, '2023-10-11 12:43:37.966000', null, 0, 'Purchasing Terms Domestic:', 'Mostly within agreed terms, in individual cases installment payments', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (7, '2023-10-11 12:43:37.970000', null, '2023-10-11 12:43:37.970000', null, 0, 'Purchasing Terms International:', 'Letter of Credit (At-sight/Defferd), Telegraphic Transfer (T/T).', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (8, '2023-10-11 12:43:37.974000', null, '2023-10-11 12:43:37.974000', null, 0, 'Export Market:', '● Australia ● Hong–Kong ●  USA', 1);
+-- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (9, '2023-10-11 12:43:37.978000', null, '2023-10-11 12:43:37.978000', null, 0, 'Import Form:', '● China ● India ●  Thailand', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_operation_info;
+CREATE PROCEDURE insert_operation_info(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.operation_info (created_at, created_by, updated_at, updated_by, version, item_code,
+                                           item_value, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Activity Status:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Activities:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'NAICS Code:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Items Dealing In:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Export/Import Permit:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms Domestic:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms International:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Export Market:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Import Form:', '', companyInfoId);
+
+
+END &&
+DELIMITER ;
+
+
+
+# ===============================================(corporate_structure)
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, null, null, '2023-10-11 15:20:23.305000', null, 1, 'Number of Employee:', '1,000+', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, null, null, '2023-10-11 15:20:23.312000', null, 1, 'Listed Status:', 'Not Listed', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, null, null, '2023-10-11 15:20:23.314000', null, 1, 'Listed Status:', 'Stock Code : NA', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, null, null, '2023-10-11 15:20:23.315000', null, 1, 'Listed Status:', 'Stock Exchange : NA', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (5, null, null, '2023-10-11 15:20:23.316000', null, 1, 'Holding Company:', 'Sterling Apparel Limited', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (6, null, null, '2023-10-11 15:20:23.317000', null, 1, 'Holding Company:', 'Address: No. 18–20/F, Win Plaza, 9 Sheung Hai Street, San Po Kong, Hong Kong', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (7, null, null, '2023-10-11 15:20:23.318000', null, 1, 'Holding Company:', 'Factory: Zhi Wei (Guangzhou) Garment Co., Limited', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (8, null, null, '2023-10-11 15:20:23.319000', null, 1, 'Holding Company:', 'Address: 2/F, Block A, Heyu Industrial Park, Chao Tian Industrial Zone,
+--         Song Shan Road, Shi Lou Town, Panyu City, Guangdong, P.R.C.', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (9, null, null, '2023-10-11 15:20:23.319000', null, 1, 'Sister Concern:', 'Sterling Group Holdings Limited::Chiefway International Limited::Chiefway (Private) Limited', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (10, null, null, '2023-10-11 15:20:23.320000', null, 1, 'Affiliated Companies:', 'Nil', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (11, null, null, '2023-10-11 15:20:23.320000', null, 1, 'Adverse Data Monitoring:', 'Dishonored Checks:No Records Found', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (12, null, null, '2023-10-11 15:20:23.321000', null, 1, 'Adverse Data Monitoring:', 'Debt:No Records Found', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (13, null, null, '2023-10-11 15:20:23.321000', null, 1, 'Adverse Data Monitoring:', 'Litigation:No Records Found', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (14, null, null, '2023-10-11 15:20:23.322000', null, 1, 'Adverse Data Monitoring:', 'Performance Defaults:No Records Found', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (15, null, null, '2023-10-11 15:20:23.323000', null, 1, 'Adverse Data Monitoring:', 'Adverse Press Coverage:No Records Found', 1);
+-- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (16, null, null, '2023-10-11 15:20:23.323000', null, 1, 'Adverse Data Monitoring:', 'Money Laundering:No Records Found', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_corporate_structure;
+CREATE PROCEDURE insert_corporate_structure(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.corporate_structure (created_at, created_by, updated_at, updated_by, version, item_code,
+                                                item_value, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Number of Employee:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Sister Concern:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Affiliated Companies:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId);
+
+
+END &&
+DELIMITER ;
+
+
+# ===============================================(financial_note)
+-- INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, '2023-10-11 19:45:26.249000', null, '2023-10-11 19:45:26.249000', null, 0, 'Financial Note', 'Financial Year ended as of 30th June.', 1);
+-- INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, '2023-10-11 19:45:26.257000', null, '2023-10-11 19:45:26.257000', null, 0, 'Financial Note', 'The information provided is collected unofficially. Noted based on the
+--         Corporate Laws of Sri Lanka, Legal Entities Which is Private Company with
+--         Limited Liability is not required to Make Public Disclosure of Their Annual
+--         Financials. Therefore, No Financials are Available for this Entity.', 1);
+-- INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, '2023-10-11 19:45:26.260000', null, '2023-10-11 19:45:26.260000', null, 0, 'Auditor', 'Name: BDO Partners', 1);
+-- INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, '2023-10-11 19:45:26.262000', null, '2023-10-11 19:45:26.262000', null, 0, 'Auditor', 'Address: Charter House” No. 65/2, Sir. Chittampalam A. Gardiner Mawatha,
+--         Colombo–2, Sri Lanka', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_financial_note;
+CREATE PROCEDURE insert_financial_note(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.financial_note (created_at, created_by, updated_at, updated_by, version, item_code,
+                                           item_value, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Financial Note', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Auditor', '', companyInfoId);
+
+END &&
+DELIMITER ;
+
+
+# ===============================================(summary_opinion)
+-- INSERT INTO credit_infix.summary_opinion (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, '2023-10-18 10:23:42.530000', null, '2023-10-18 10:23:42.530000', null, 0, 'Summary:', 'Established in 2017 as a Private Limited Liability Company, subject has been in
+-- operation for 06 years under the present name style of CHIEFWAY
+-- KATUNAYAKE (PRIVATE) LIMITED.
+-- Mr. Wickramasinghe Senanayake Appuhamilage Vipul Abayanga Senanayake,
+-- the Managing Director of the company is responsible for its overall
+-- management, strategic planning and business developments.
+-- Subject is engaged in Manufacture, Import and Export of apparel product. It’s
+-- products includes wide range of blazers, coats, jackets, pants and skirts etc.
+-- Market reputation is excellent and no detrimental information was found
+-- during the course of investigation.
+-- Payment records are satisfactory and a search of public records and
+-- bankruptcy courts returned no derogatory information or record of the
+-- company filing a bankruptcy petition.
+-- Litigation status is found to be clear. No payment default cases are found
+-- registered with Court of local jurisdiction.', 1);
+-- INSERT INTO credit_infix.summary_opinion (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, '2023-10-18 10:23:42.579000', null, '2023-10-18 10:23:42.580000', null, 0, 'Opinion:', 'Based on Subject''s Score Factor, Subject has been given a credit rating of C.
+-- The company is acceptable for normal business engagements. Risk factors are
+-- moderate level.', 1);
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_summary_opinion;
+CREATE PROCEDURE insert_summary_opinion(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.summary_opinion (created_at, created_by, updated_at, updated_by, version, item_code,
+                                            item_value, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Summary:', '', companyInfoId),
+         (NOW(), createdBy, NOW(), null, 0, 'Opinion:', '', companyInfoId);
+
+END &&
+DELIMITER ;
+
+
+# ===============================================(nature_of_business)
+
+INSERT INTO credit_infix.nature_of_business (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, null, null, '2023-10-16 19:35:44.374000', null, 1, 'Business Activity:', 'Manufacture, Import and Export', 1);
+INSERT INTO credit_infix.nature_of_business (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (2, null, null, '2023-10-16 19:35:44.376000', null, 1, 'Range of Products:', '● Blazers
+●  Coats
+● Jackets
+● Pants
+● Skirts', 1);
+INSERT INTO credit_infix.nature_of_business (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (3, null, null, '2023-10-16 19:35:44.377000', null, 1, 'Certifications:', 'NA', 1);
+INSERT INTO credit_infix.nature_of_business (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (4, null, null, '2023-10-16 19:35:44.378000', null, 1, 'Brands :', 'NA', 1);
+INSERT INTO credit_infix.nature_of_business (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (5, null, null, '2023-10-16 19:35:44.378000', null, 1, 'Group Name::', 'NA', 1);
+
+
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_nature_of_business;
+CREATE PROCEDURE insert_nature_of_business(IN companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  INSERT INTO credit_infix.nature_of_business (created_at, created_by, updated_at, updated_by, version, item_code,
+                                               item_value, company_info_id)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Business Activity:', '',companyInfoId),
+   (NOW(), createdBy, NOW(), null, 0, 'Range of Products:', '',companyInfoId),
+   (NOW(), createdBy, NOW(), null, 0, 'Certifications:', '',companyInfoId),
+   (NOW(), createdBy, NOW(), null, 0, 'Brands:', '',companyInfoId),
+   (NOW(), createdBy, NOW(), null, 0, 'Group Name:', '',companyInfoId);
+
+END &&
+DELIMITER ;
+---------------------------------------------------------------------------
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS insert_template_data;
+CREATE PROCEDURE insert_template_data(in templateName varchar(50), in companyInfoId Long, IN createdBy Long)
+BEGIN
+
+  CASE templateName
+    WHEN 'financial_summary' THEN
+      CALL insert_financial_summary(companyInfoId, createdBy);
+
+    WHEN 'risk_profile' THEN
+      CALL insert_risk_profile(companyInfoId, createdBy);
+
+    WHEN 'order_detail' THEN
+      CALL insert_order_detail(companyInfoId, createdBy);
+
+    WHEN 'registration_detail' THEN
+      CALL insert_registration_detail(companyInfoId, createdBy);
+
+    WHEN 'location' THEN
+      CALL insert_location(companyInfoId, createdBy);
+
+    WHEN 'operation_info' THEN
+      CALL insert_operation_info(companyInfoId, createdBy);
+
+    WHEN 'nature_of_business' THEN
+      CALL insert_nature_of_business(companyInfoId, createdBy);
+
+    WHEN 'corporate_structure' THEN
+      CALL insert_corporate_structure(companyInfoId, createdBy);
+
+    WHEN 'financial_note' THEN
+      CALL insert_financial_note(companyInfoId, createdBy);
+
+    WHEN 'summary_opinion' THEN
+      CALL insert_summary_opinion(companyInfoId, createdBy);
+    END CASE;
+
+END &&
+DELIMITER ;

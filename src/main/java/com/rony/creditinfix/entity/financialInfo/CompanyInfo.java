@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -22,6 +23,9 @@ public class CompanyInfo extends CommonColumn {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "transaction_date")
+    private Date transactionDate;
 
     @Column(name = "legal_address")
     private String legalAddress;
@@ -100,6 +104,7 @@ public class CompanyInfo extends CommonColumn {
         this.setId(companyInfoDTO.getId());
         this.setVersion(companyInfoDTO.getVersion());
         this.setName(companyInfoDTO.getName());
+        this.setTransactionDate(companyInfoDTO.getTransactionDate());
         this.setLegalAddress(companyInfoDTO.getLegalAddress());
         this.setOperationAddress(companyInfoDTO.getOperationAddress());
         this.setTelephoneNumber(companyInfoDTO.getTelephoneNumber());

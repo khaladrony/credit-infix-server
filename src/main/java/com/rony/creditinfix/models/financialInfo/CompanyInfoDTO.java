@@ -6,12 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CompanyInfoDTO {
     private Long id;
     private int version;
+    private Date transactionDate;
     private String name;
     private String legalAddress;
     private String operationAddress;
@@ -45,6 +48,7 @@ public class CompanyInfoDTO {
         this.setId(companyInfo.getId());
         this.setVersion(companyInfo.getVersion());
         this.setName(companyInfo.getName());
+        this.setTransactionDate(companyInfo.getTransactionDate());
         this.setLegalAddress(companyInfo.getLegalAddress());
         this.setOperationAddress(companyInfo.getOperationAddress());
         this.setTelephoneNumber(companyInfo.getTelephoneNumber());
