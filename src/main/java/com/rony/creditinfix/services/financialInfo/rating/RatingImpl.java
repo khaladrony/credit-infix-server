@@ -9,7 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -46,7 +48,9 @@ public class RatingImpl implements RatingService {
     @Override
     public List<RatingDTO> findAll() {
         List<RatingDTO> ratingDTOS = new ArrayList<>();
-        List<Rating> ratings = ratingRepository.findAll();
+        List<Rating> ratings = ratingRepository.findAll().stream()
+                .sorted(Comparator.comparingInt(Rating::getStartRange).reversed())
+                .collect(Collectors.toList());
         for (Rating rating : ratings) {
             RatingDTO ratingDTO = new RatingDTO(rating);
             ratingDTOS.add(ratingDTO);

@@ -8,7 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -50,7 +54,7 @@ public class FileUploadController {
             map.put("fileUri", path);
 
             response.setData(map);
-            response.setMessage(messageSource.getMessage("api.create.success", null, null));
+            response.setMessage(messageSource.getMessage("api.image.upload.success", null, null));
             response.setSuccess(true);
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -103,5 +107,27 @@ public class FileUploadController {
             log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+
+    @RequestMapping(value = "/image-preview", method = RequestMethod.GET)
+    public ResponseEntity<Resource> downloadUploadedFile(@RequestParam("fileName") String fileName) {
+        ApiResponse response = new ApiResponse(false);
+        Resource resource = null;
+        String mimeType;
+
+        try {
+            resource = fileUploadService.viewFile("", fileName);
+        } catch (ServiceException e) {
+            System.err.println(e.getMessage());
+        }
+        mimeType = MediaType.APPLICATION_OCTET_STREAM_VALUE;
+
+
+        assert resource != null;
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(mimeType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + resource.getFilename())
+                .body(resource);
     }
 }

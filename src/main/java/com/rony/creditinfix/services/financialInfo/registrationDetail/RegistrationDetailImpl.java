@@ -3,6 +3,7 @@ package com.rony.creditinfix.services.financialInfo.registrationDetail;
 
 import com.rony.creditinfix.entity.financialInfo.FinancialSummary;
 import com.rony.creditinfix.entity.financialInfo.RegistrationDetail;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.RegistrationDetailDTO;
 import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
@@ -103,12 +104,17 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        RegistrationDetailDTO registrationDetailDTO = this.findById(id);
+        if (registrationDetailDTO == null) throw new NotFoundException();
+
+        registrationDetailRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public RegistrationDetailDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<RegistrationDetail> registrationDetail = registrationDetailRepository.findById(id);
+        return registrationDetail.isEmpty() ? null : new RegistrationDetailDTO(registrationDetail.get());
     }
 
     @Override
@@ -134,7 +140,7 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
             for (FinancialSummary finSummary : financialSummaryList) {
                 if (i == j) {
                     detailDTO.setSubItem(finSummary.getItemCode());
-                    detailDTO.setItemValue(String.valueOf(finSummary.getAmount()));
+                    detailDTO.setItemValue(detailDTO.getCompanyInfo().getCurrency() + " " + String.format("%.0f", finSummary.getAmount()));
                     break;
                 }
                 j++;

@@ -68,6 +68,7 @@ public class FileUploadServiceImpl implements FileUploadService {
 
     @Override
     public Resource viewFile(String filePath, String fileName) throws ServiceException {
+        filePath = FileUploadService.FILE_UPLOAD_DIRECTORY_NAME;
         Path path = Paths.get(this.root + File.separator + filePath)
                 .toAbsolutePath().resolve(fileName);
 

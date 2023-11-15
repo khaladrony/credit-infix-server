@@ -91,34 +91,36 @@ DELIMITER ;
 -- INSERT INTO credit_infix.registration_detail (id, created_at, created_by, updated_at, updated_by, version, is_col_span, is_row_span, item, item_value, sub_item, company_info_id) VALUES (12, '2023-10-09 18:24:13.988000', null, '2023-10-09 18:24:13.988000', null, 0, false, false, 'Issuing Authority:', 'The Department of the Registrar of Companies, Sri Lanka.', '', 1);
 
 
+
 DELIMITER &&
 DROP PROCEDURE IF EXISTS insert_registration_detail;
 CREATE PROCEDURE insert_registration_detail(IN companyInfoId Long, IN createdBy Long)
 BEGIN
 
   INSERT INTO credit_infix.registration_detail (created_at, created_by, updated_at, updated_by, version,
-                                                is_col_span, is_row_span, item, item_value, sub_item, company_info_id)
-  VALUES (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '31st March 2017',
-          'Registration Date', companyInfoId),
+                                                is_col_span, is_row_span, item, item_value, sub_item, company_info_id, sequence)
+  VALUES (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
+          'Registration Date', companyInfoId,1),
          (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '', 'Company Registration No',
-          companyInfoId),
+          companyInfoId,1),
          (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
-          'Business Identification No(BIN)', companyInfoId),
+          'Business Identification No(BIN)', companyInfoId,1),
          (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
-          'Import Registration Certificate No (IRC):', companyInfoId),
+          'Import Registration Certificate No (IRC):', companyInfoId,1),
          (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '',
-          'Tax Identification No (TIN):', companyInfoId),
+          'Tax Identification No (TIN):', companyInfoId,1),
          (NOW(), createdBy, NOW(), null, 0, false, false, 'Registration Information :', '', 'BGMEA Reg. No:',
-          companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Share Capital:', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Number of Share:', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Per Share Value:', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, false, false, 'Legal Status:', '', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, false, false, 'Secretary', '', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, false, false, 'Issuing Authority:', '', '', companyInfoId);
+          companyInfoId,1),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Share Capital:', companyInfoId,2),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Number of Share:', companyInfoId,2),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Capital:', '', 'Per Share Value:', companyInfoId,2),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Legal Status:', '', '', companyInfoId,3),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Secretary', '', '', companyInfoId,4),
+         (NOW(), createdBy, NOW(), null, 0, false, false, 'Issuing Authority:', '', '', companyInfoId,5);
 
 END &&
 DELIMITER ;
+
 
 
 # ===============================================(location)
@@ -155,23 +157,22 @@ DELIMITER ;
 -- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (8, '2023-10-11 12:43:37.974000', null, '2023-10-11 12:43:37.974000', null, 0, 'Export Market:', '● Australia ● Hong–Kong ●  USA', 1);
 -- INSERT INTO credit_infix.operation_info (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (9, '2023-10-11 12:43:37.978000', null, '2023-10-11 12:43:37.978000', null, 0, 'Import Form:', '● China ● India ●  Thailand', 1);
 
-
 DELIMITER &&
 DROP PROCEDURE IF EXISTS insert_operation_info;
 CREATE PROCEDURE insert_operation_info(IN companyInfoId Long, IN createdBy Long)
 BEGIN
 
   INSERT INTO credit_infix.operation_info (created_at, created_by, updated_at, updated_by, version, item_code,
-                                           item_value, company_info_id)
-  VALUES (NOW(), createdBy, NOW(), null, 0, 'Activity Status:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Activities:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'NAICS Code:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Items Dealing In:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Export/Import Permit:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms Domestic:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms International:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Export Market:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Import Form:', '', companyInfoId);
+                                           item_value, company_info_id, sequence)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Activity Status:', '', companyInfoId,1),
+         (NOW(), createdBy, NOW(), null, 0, 'Activities:', '', companyInfoId,2),
+         (NOW(), createdBy, NOW(), null, 0, 'Activities:', '', companyInfoId,2),
+         (NOW(), createdBy, NOW(), null, 0, 'Items Dealing In:', '', companyInfoId,3),
+         (NOW(), createdBy, NOW(), null, 0, 'Export/Import Permit:', '', companyInfoId,4),
+         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms Domestic:', '', companyInfoId,5),
+         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms International:', '', companyInfoId,6),
+         (NOW(), createdBy, NOW(), null, 0, 'Export Market:', '', companyInfoId,7),
+         (NOW(), createdBy, NOW(), null, 0, 'Import Form:', '', companyInfoId,8);
 
 
 END &&
@@ -199,34 +200,24 @@ DELIMITER ;
 -- INSERT INTO credit_infix.corporate_structure (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (16, null, null, '2023-10-11 15:20:23.323000', null, 1, 'Adverse Data Monitoring:', 'Money Laundering:No Records Found', 1);
 
 
+
 DELIMITER &&
 DROP PROCEDURE IF EXISTS insert_corporate_structure;
 CREATE PROCEDURE insert_corporate_structure(IN companyInfoId Long, IN createdBy Long)
 BEGIN
 
   INSERT INTO credit_infix.corporate_structure (created_at, created_by, updated_at, updated_by, version, item_code,
-                                                item_value, company_info_id)
-  VALUES (NOW(), createdBy, NOW(), null, 0, 'Number of Employee:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Sister Concern:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Affiliated Companies:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId);
+                                                item_value, company_info_id, sequence)
+  VALUES (NOW(), createdBy, NOW(), null, 0, 'Number of Employee:', '', companyInfoId,1),
+         (NOW(), createdBy, NOW(), null, 0, 'Listed Status:', '', companyInfoId,2),
+         (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId,3),
+         (NOW(), createdBy, NOW(), null, 0, 'Sister Concern:', '', companyInfoId,4),
+         (NOW(), createdBy, NOW(), null, 0, 'Affiliated Companies:', '', companyInfoId,5),
+         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId,6);
 
 
 END &&
 DELIMITER ;
-
 
 # ===============================================(financial_note)
 -- INSERT INTO credit_infix.financial_note (id, created_at, created_by, updated_at, updated_by, version, item_code, item_value, company_info_id) VALUES (1, '2023-10-11 19:45:26.249000', null, '2023-10-11 19:45:26.249000', null, 0, 'Financial Note', 'Financial Year ended as of 30th June.', 1);

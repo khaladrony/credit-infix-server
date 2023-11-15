@@ -54,6 +54,9 @@ public class CompanyInfo extends CommonColumn {
     @Column(name = "country")
     private String country;
 
+    @Column(name = "currency")
+    private String currency;
+
     @Column(name = "business_scale")
     private String businessScale;
 
@@ -114,6 +117,7 @@ public class CompanyInfo extends CommonColumn {
         this.setAgeOfBusiness(companyInfoDTO.getAgeOfBusiness());
         this.setBusinessType(companyInfoDTO.getBusinessType());
         this.setCountry(companyInfoDTO.getCountry());
+        this.setCurrency(companyInfoDTO.getCurrency());
         this.setBusinessScale(companyInfoDTO.getBusinessScale());
         this.setPaymentPractices(companyInfoDTO.getPaymentPractices());
         this.setListedStatus(companyInfoDTO.getListedStatus());

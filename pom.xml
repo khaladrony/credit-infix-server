@@ -11,7 +11,8 @@
 	<groupId>com.rony</groupId>
 	<artifactId>credit-infix-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<!--<packaging>war</packaging>-->
+	<packaging>jar</packaging>
 	<name>credit-infix-server</name>
 	<description>API for credit infix</description>
 

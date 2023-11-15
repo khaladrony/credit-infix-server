@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.rony.creditinfix.models.ApiResponse;
-import com.rony.creditinfix.models.financialInfo.NatureOfBusinessDTO;
-import com.rony.creditinfix.services.financialInfo.natureOfBusiness.NatureOfBusinessService;
+import com.rony.creditinfix.models.financialInfo.BankersDTO;
+import com.rony.creditinfix.services.financialInfo.bankers.BankersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -20,25 +20,24 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/financial-info/nature-of-business")
-public class NatureOfBusinessController {
+@RequestMapping("/financial-info/bankers")
+public class BankersController {
 
     @Autowired
     private MessageSource messageSource;
     @Autowired
-    private NatureOfBusinessService natureOfBusinessService;
-
+    private BankersService bankersService;
 
     /**
-     * Create Nature Of Business List
+     * Create Bankers List
      *
-     * @param natureOfBusinessList
+     * @param bankersList
      * @param companyInfoId
      * @return
      */
     @PostMapping("/save")
     @ApiIgnore
-    public ResponseEntity<Object> login(@RequestParam(value = "natureOfBusinessList") String natureOfBusinessList,
+    public ResponseEntity<Object> save(@RequestParam(value = "bankersList") String bankersList,
                                         @RequestParam(value = "companyInfoId") String companyInfoId) {
 
         ApiResponse response = new ApiResponse(false);
@@ -47,11 +46,11 @@ public class NatureOfBusinessController {
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
             mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-            List<NatureOfBusinessDTO> reqModel =
-                    mapper.readValue(natureOfBusinessList, new TypeReference<List<NatureOfBusinessDTO>>() {
+            List<BankersDTO> reqModel =
+                    mapper.readValue(bankersList, new TypeReference<List<BankersDTO>>() {
                     });
 
-            response.setData(natureOfBusinessService.saveAll(reqModel, Long.parseLong(companyInfoId)));
+            response.setData(bankersService.saveAll(reqModel, Long.parseLong(companyInfoId)));
             response.setMessage(messageSource.getMessage("api.create.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -63,7 +62,7 @@ public class NatureOfBusinessController {
 
 
     /**
-     * Get Nature Of Business List
+     * Get Bankers List
      *
      * @param companyInfoId
      * @return
@@ -72,28 +71,8 @@ public class NatureOfBusinessController {
     public ResponseEntity<Object> getList(@RequestParam @Valid Long companyInfoId) {
         ApiResponse response = new ApiResponse(false);
         try {
-            response.setData(natureOfBusinessService.findAllByCompanyInfoId(companyInfoId));
+            response.setData(bankersService.findAllByCompanyInfoId(companyInfoId));
             response.setMessage(messageSource.getMessage("api.list.success", null, null));
-            response.setSuccess(true);
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            response.setMessage(e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-
-    /**
-     * Delete Nature Of Business
-     *
-     * @param id
-     * @return
-     */
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Object> delete(@RequestParam @Valid Long id) {
-        ApiResponse response = new ApiResponse(false);
-        try {
-            response.setData(natureOfBusinessService.delete(id));
-            response.setMessage(messageSource.getMessage("api.delete.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.rony.creditinfix.services.financialInfo.natureOfBusiness;
 
 import com.rony.creditinfix.entity.financialInfo.NatureOfBusiness;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.NatureOfBusinessDTO;
 import com.rony.creditinfix.models.financialInfo.OperationInfoDTO;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NatureOfBusinessImpl implements NatureOfBusinessService {
@@ -52,12 +54,18 @@ public class NatureOfBusinessImpl implements NatureOfBusinessService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        NatureOfBusinessDTO natureOfBusinessDTO = this.findById(id);
+        if (natureOfBusinessDTO == null) throw new NotFoundException();
+
+        natureOfBusinessRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public NatureOfBusinessDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<NatureOfBusiness> natureOfBusiness = natureOfBusinessRepository.findById(id);
+        return natureOfBusiness.isEmpty() ? null : new NatureOfBusinessDTO(natureOfBusiness.get());
+
     }
 
     @Override

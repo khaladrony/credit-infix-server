@@ -2,6 +2,7 @@ package com.rony.creditinfix.services.financialInfo.location;
 
 
 import com.rony.creditinfix.entity.financialInfo.Location;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.LocationDTO;
 import com.rony.creditinfix.repository.financialInfo.LocationRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationImpl implements LocationService {
@@ -53,12 +55,17 @@ public class LocationImpl implements LocationService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        LocationDTO locationDTO = this.findById(id);
+        if (locationDTO == null) throw new NotFoundException();
+
+        locationRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public LocationDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<Location> location = locationRepository.findById(id);
+        return location.isEmpty() ? null : new LocationDTO(location.get());
     }
 
     @Override

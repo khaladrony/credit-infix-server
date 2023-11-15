@@ -1,6 +1,7 @@
 package com.rony.creditinfix.services.financialInfo.operationInfo;
 
 import com.rony.creditinfix.entity.financialInfo.OperationInfo;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.OperationInfoDTO;
 import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -101,12 +99,18 @@ public class OperationInfoImpl implements OperationInfoService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        OperationInfoDTO operationInfoDTO = this.findById(id);
+        if (operationInfoDTO == null) throw new NotFoundException();
+
+        operationInfoRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public OperationInfoDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<OperationInfo> operationInfo = operationInfoRepository.findById(id);
+        return operationInfo.isEmpty() ? null : new OperationInfoDTO(operationInfo.get());
+
     }
 
     @Override

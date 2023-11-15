@@ -1,6 +1,5 @@
 package com.rony.creditinfix.services.storedProcedure;
 
-import com.rony.creditinfix.security.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -16,9 +15,6 @@ public class StoredProcedureExecuteServiceImpl implements StoredProcedureExecute
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    SpringSecurityUtil springSecurityUtil;
 
     @Override
     public String execute(String templateName, Long companyInfoId) {

@@ -2,6 +2,7 @@ package com.rony.creditinfix.services.financialInfo.financialSummary;
 
 import com.rony.creditinfix.entity.financialInfo.CompanyInfo;
 import com.rony.creditinfix.entity.financialInfo.FinancialSummary;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.FinancialSummaryDTO;
 import com.rony.creditinfix.repository.financialInfo.FinancialSummaryRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -33,12 +35,17 @@ public class FinancialSummaryImpl implements FinancialSummaryService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        FinancialSummaryDTO financialSummaryDTO = this.findById(id);
+        if (financialSummaryDTO == null) throw new NotFoundException();
+
+        financialSummaryRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public FinancialSummaryDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<FinancialSummary> financialSummary = financialSummaryRepository.findById(id);
+        return financialSummary.isEmpty() ? null : new FinancialSummaryDTO(financialSummary.get());
     }
 
     @Override

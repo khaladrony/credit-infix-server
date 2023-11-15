@@ -20,14 +20,12 @@ public class CompanyInfoDTO {
     private String operationAddress;
     private String telephoneNumber;
     private String website;
-//    private String faxNo;
-//    private String email;
     private String industryType;
     private String yearEstablished;
     private String ageOfBusiness;
     private String businessType;
     private String country;
-//    private String state;
+    private String currency;
     private String businessScale;
     private String paymentPractices;
     private String listedStatus;
@@ -58,6 +56,7 @@ public class CompanyInfoDTO {
         this.setAgeOfBusiness(companyInfo.getAgeOfBusiness());
         this.setBusinessType(companyInfo.getBusinessType());
         this.setCountry(companyInfo.getCountry());
+        this.setCurrency(companyInfo.getCurrency());
         this.setBusinessScale(companyInfo.getBusinessScale());
         this.setPaymentPractices(companyInfo.getPaymentPractices());
         this.setListedStatus(companyInfo.getListedStatus());

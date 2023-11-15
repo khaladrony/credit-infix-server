@@ -6,12 +6,12 @@ import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.repository.financialInfo.CompanyInfoRepository;
-import com.rony.creditinfix.security.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,16 +20,14 @@ public class CompanyInfoImpl implements CompanyInfoService {
 
     @Autowired
     private CompanyInfoRepository companyInfoRepository;
-    @Autowired
-    private SpringSecurityUtil springSecurityUtil;
 
     @Override
     public CompanyInfoDTO create(CompanyInfoDTO companyInfoDTO) throws ServiceException {
-        Long createdBy = springSecurityUtil.getLoggedInUserId();
         CompanyInfo companyInfo = new CompanyInfo(companyInfoDTO);
 
         this.duplicateCheck(companyInfoDTO, "save");
-        companyInfo.setCreatedBy(createdBy);
+        companyInfo.setCreatedBy(1L);
+        companyInfo.setTransactionDate(new Date());
         return new CompanyInfoDTO(companyInfoRepository.save(companyInfo));
     }
 
@@ -67,7 +65,6 @@ public class CompanyInfoImpl implements CompanyInfoService {
 
     @Override
     public List<CompanyInfoDTO> findAll() {
-        Long createdBy = springSecurityUtil.getLoggedInUserId();
         List<CompanyInfoDTO> companyInfoDTOS = new ArrayList<>();
         List<CompanyInfo> companyInfos = companyInfoRepository.findAll();
         for (CompanyInfo companyInfo : companyInfos) {

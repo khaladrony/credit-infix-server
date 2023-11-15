@@ -81,4 +81,25 @@ public class LocationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+
+
+    /**
+     * Delete Location
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Object> delete(@RequestParam @Valid Long id) {
+        ApiResponse response = new ApiResponse(false);
+        try {
+            response.setData(locationService.delete(id));
+            response.setMessage(messageSource.getMessage("api.delete.success", null, null));
+            response.setSuccess(true);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 }

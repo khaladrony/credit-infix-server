@@ -26,7 +26,7 @@ public class CorporateStructure extends CommonColumn {
     @Column(name = "item_code")
     private String itemCode;
 
-    @Column(name = "item_value")
+    @Column(name = "item_value", length = 1000)
     private String itemValue;
 
     @Column(name = "sequence")
