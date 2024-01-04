@@ -1,6 +1,7 @@
 package com.rony.creditinfix.services.auth.feature;
 
 import com.rony.creditinfix.entity.auth.Feature;
+import com.rony.creditinfix.entity.auth.Menu;
 import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.auth.FeatureDTO;
@@ -9,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
+import static java.util.stream.Collectors.groupingBy;
 
 @Service
 public class FeatureServiceImpl implements FeatureService {
@@ -44,6 +45,7 @@ public class FeatureServiceImpl implements FeatureService {
         _featureDTO.setType(featureDTO.getType());
         _featureDTO.setCollapsed(featureDTO.isCollapsed());
         _featureDTO.setMenu(featureDTO.getMenu());
+        _featureDTO.setMenuType(featureDTO.getMenuType());
         _featureDTO.setStatus(featureDTO.getStatus());
 
         Feature feature = new Feature(_featureDTO);
@@ -74,6 +76,7 @@ public class FeatureServiceImpl implements FeatureService {
 
     @Override
     public List<FeatureDTO> findAll() {
+//        this.menus();
         List<FeatureDTO> featureDTOS = new ArrayList<>();
         List<Feature> featureList = featureRepository.findAll();
         for (Feature feature : featureList) {
@@ -107,5 +110,28 @@ public class FeatureServiceImpl implements FeatureService {
 //        } else {
 //            feature.setType("link");
 //        }
+    }
+
+    public void menus(){
+        List<Feature> featureList = featureRepository.findAll();
+
+        List<Feature> features = new ArrayList<>();
+
+        Map<Feature, List<Feature>> featureMap =new HashMap<>();
+
+        List<Map<Feature, List<Feature>>> featureMapList = new ArrayList<>();
+
+        Map<Menu, List<Feature>> list =   featureList.stream()
+                .collect(groupingBy(Feature::getMenu));
+
+        System.out.println(list);
+
+        list.forEach((menu, featureLst)->{
+            System.out.println(menu);
+            System.out.println(featureLst);
+        });
+
+
+
     }
 }

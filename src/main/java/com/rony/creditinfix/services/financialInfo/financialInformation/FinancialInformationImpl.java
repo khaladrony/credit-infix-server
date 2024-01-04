@@ -2,6 +2,7 @@ package com.rony.creditinfix.services.financialInfo.financialInformation;
 
 
 import com.rony.creditinfix.entity.financialInfo.FinancialInformation;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.FinancialInformationDTO;
 import com.rony.creditinfix.repository.financialInfo.FinancialInformationRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FinancialInformationImpl implements FinancialInformationService {
@@ -22,6 +24,10 @@ public class FinancialInformationImpl implements FinancialInformationService {
     @Override
     public List<FinancialInformationDTO> saveAll(List<FinancialInformationDTO> financialInformationDTOS, Long companyInfoId) {
         List<FinancialInformation> financialInformationList = new ArrayList<>();
+
+        //delete existing data
+        this.deleteAllByCompanyInfoId(companyInfoId);
+
         for (FinancialInformationDTO financialInformationDTO : financialInformationDTOS) {
             FinancialInformation corporateStructure = new FinancialInformation(financialInformationDTO);
             financialInformationList.add(corporateStructure);
@@ -42,6 +48,11 @@ public class FinancialInformationImpl implements FinancialInformationService {
     }
 
     @Override
+    public void deleteAllByCompanyInfoId(Long companyInfoId) {
+        financialInformationRepository.deleteAllByCompanyInfoId(companyInfoId);
+    }
+
+    @Override
     public FinancialInformationDTO create(FinancialInformationDTO financialInformationDTO) throws ServiceException {
         return null;
     }
@@ -53,12 +64,17 @@ public class FinancialInformationImpl implements FinancialInformationService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        FinancialInformationDTO financialInformationDTO = this.findById(id);
+        if (financialInformationDTO == null) throw new NotFoundException();
+
+        financialInformationRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public FinancialInformationDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<FinancialInformation> financialInformation = financialInformationRepository.findById(id);
+        return financialInformation.isEmpty() ? null : new FinancialInformationDTO(financialInformation.get());
     }
 
     @Override

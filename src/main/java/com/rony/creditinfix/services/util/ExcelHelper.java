@@ -5,6 +5,7 @@ import com.rony.creditinfix.models.financialInfo.ManagementDTO;
 import com.rony.creditinfix.models.financialInfo.ShareholderDTO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -81,21 +82,24 @@ public class ExcelHelper {
                 Iterator<Cell> cellIterator = row.iterator();
                 int cid = 0;
                 financialInformationDTO = new FinancialInformationDTO();
+                DataFormatter dataFormatter = new DataFormatter();
+
                 while (cellIterator.hasNext()) {
                     Cell cell = cellIterator.next();
 
+                    System.out.println(dataFormatter.formatCellValue(cell));
                     switch (cid) {
                         case 0:
                             financialInformationDTO.setItemCode(cell.getStringCellValue());
                             break;
                         case 1:
-                            financialInformationDTO.setThirdYear(getCellValueString(cell));
+                            financialInformationDTO.setThirdYear(dataFormatter.formatCellValue(cell));
                             break;
                         case 2:
-                            financialInformationDTO.setSecondYear(getCellValueString(cell));
+                            financialInformationDTO.setSecondYear(dataFormatter.formatCellValue(cell));
                             break;
                         case 3:
-                            financialInformationDTO.setFirstYear(getCellValueString(cell));
+                            financialInformationDTO.setFirstYear(dataFormatter.formatCellValue(cell));
                             break;
                         default:
                             break;

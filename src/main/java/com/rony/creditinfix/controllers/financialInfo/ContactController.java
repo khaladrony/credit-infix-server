@@ -5,6 +5,7 @@ import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.models.financialInfo.ContactDTO;
 import com.rony.creditinfix.services.financialInfo.contact.ContactService;
+import com.rony.creditinfix.util.General;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -38,8 +39,7 @@ public class ContactController {
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            ContactDTO reqModel = mapper.readValue(contactDTO, ContactDTO.class);
+            ContactDTO reqModel = General.getObjectMapperWithDifferentProperty(contactDTO, ContactDTO.class);
             response.setData(contactService.create(reqModel));
             response.setMessage(messageSource.getMessage("api.create.success", null, null));
             response.setSuccess(true);
@@ -62,8 +62,7 @@ public class ContactController {
     public ResponseEntity<Object> update(@RequestParam(value = "contactDTO") String contactDTO) {
         ApiResponse response = new ApiResponse();
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            ContactDTO reqModel = mapper.readValue(contactDTO, ContactDTO.class);
+            ContactDTO reqModel = General.getObjectMapperWithDifferentProperty(contactDTO, ContactDTO.class);
             if (reqModel.getId() != null) {
                 response.setData(contactService.update(reqModel.getId(), reqModel));
                 response.setMessage(messageSource.getMessage("api.update.success", null, null));

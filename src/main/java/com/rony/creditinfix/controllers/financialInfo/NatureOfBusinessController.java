@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.financialInfo.NatureOfBusinessDTO;
 import com.rony.creditinfix.services.financialInfo.natureOfBusiness.NatureOfBusinessService;
+import com.rony.creditinfix.util.ApplicationConstant;
+import com.rony.creditinfix.util.General;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -39,20 +41,18 @@ public class NatureOfBusinessController {
     @PostMapping("/save")
     @ApiIgnore
     public ResponseEntity<Object> login(@RequestParam(value = "natureOfBusinessList") String natureOfBusinessList,
-                                        @RequestParam(value = "companyInfoId") String companyInfoId) {
+                                        @RequestParam(value = "companyInfoId") String companyInfoId,
+                                        @RequestParam(value = "submitType") String submitType) {
+
 
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-            List<NatureOfBusinessDTO> reqModel =
-                    mapper.readValue(natureOfBusinessList, new TypeReference<List<NatureOfBusinessDTO>>() {
-                    });
+            List<NatureOfBusinessDTO> reqModel = General.getObjectMapperWithDifferentProperty(natureOfBusinessList, new TypeReference<>() {
+            });
 
             response.setData(natureOfBusinessService.saveAll(reqModel, Long.parseLong(companyInfoId)));
-            response.setMessage(messageSource.getMessage("api.create.success", null, null));
+            response.setMessage(messageSource.getMessage(ApplicationConstant.SUBMIT_TYPE.equalsIgnoreCase(submitType) ? "api.update.success" : "api.create.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {

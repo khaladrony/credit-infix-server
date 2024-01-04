@@ -9,6 +9,7 @@ import com.rony.creditinfix.models.ImageUploadDTO;
 import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.models.financialInfo.LocationImageDTO;
 import com.rony.creditinfix.services.financialInfo.locationImage.LocationImageService;
+import com.rony.creditinfix.util.General;
 import lombok.experimental.PackagePrivate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -37,8 +38,7 @@ public class LocationImageController {
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            LocationImageDTO reqModel = mapper.readValue(locationImageDTO, LocationImageDTO.class);
+            LocationImageDTO reqModel = General.getObjectMapperWithDifferentProperty(locationImageDTO, LocationImageDTO.class);
             response.setData(locationImageService.create(reqModel));
             response.setMessage(messageSource.getMessage("api.image.upload.success", null, null));
             response.setSuccess(true);

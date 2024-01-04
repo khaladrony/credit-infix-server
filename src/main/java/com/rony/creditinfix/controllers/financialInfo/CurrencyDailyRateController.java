@@ -11,6 +11,7 @@ import com.rony.creditinfix.models.financialInfo.CurrencyDailyRateDTO;
 import com.rony.creditinfix.services.financialInfo.currencyDailyRate.CurrencyDailyRateService;
 import com.rony.creditinfix.util.AppDate;
 import com.rony.creditinfix.util.DateUtil;
+import com.rony.creditinfix.util.General;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -48,12 +49,8 @@ public class CurrencyDailyRateController {
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-            List<CurrencyDailyRateDTO> reqModel =
-                    mapper.readValue(currencyDailyRateList, new TypeReference<List<CurrencyDailyRateDTO>>() {
-                    });
+            List<CurrencyDailyRateDTO> reqModel = General.getObjectMapperWithDifferentProperty(currencyDailyRateList, new TypeReference<>() {
+            });
 
             response.setData(currencyDailyRateService.saveAll(reqModel,currencyDate));
             response.setMessage(messageSource.getMessage("api.create.success", null, null));

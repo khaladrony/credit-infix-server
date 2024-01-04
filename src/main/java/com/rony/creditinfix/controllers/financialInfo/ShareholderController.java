@@ -10,6 +10,8 @@ import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.financialInfo.ManagementDTO;
 import com.rony.creditinfix.models.financialInfo.ShareholderDTO;
 import com.rony.creditinfix.services.financialInfo.shareholder.ShareholderService;
+import com.rony.creditinfix.util.ApplicationConstant;
+import com.rony.creditinfix.util.General;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -42,20 +44,17 @@ public class ShareholderController {
     @PostMapping("/save")
     @ApiIgnore
     public ResponseEntity<Object> login(@RequestParam(value = "shareholderList") String shareholderList,
-                                        @RequestParam(value = "companyInfoId") String companyInfoId) {
+                                        @RequestParam(value = "companyInfoId") String companyInfoId,
+                                        @RequestParam(value = "submitType") String submitType) {
 
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-            List<ShareholderDTO> reqModel =
-                    mapper.readValue(shareholderList, new TypeReference<List<ShareholderDTO>>() {
-                    });
+            List<ShareholderDTO> reqModel = General.getObjectMapperWithDifferentProperty(shareholderList, new TypeReference<>() {
+            });
 
             response.setData(shareholderService.saveAll(reqModel, Long.parseLong(companyInfoId)));
-            response.setMessage(messageSource.getMessage("api.create.success", null, null));
+            response.setMessage(messageSource.getMessage(ApplicationConstant.SUBMIT_TYPE.equalsIgnoreCase(submitType) ? "api.update.success" : "api.create.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {

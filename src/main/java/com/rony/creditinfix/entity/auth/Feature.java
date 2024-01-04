@@ -30,7 +30,7 @@ public class Feature extends CommonColumn {
     private String icon;
 
     @Column(name = "type")
-    private String type;        //link,submenu
+    private String type;        //link,''
 
     @Column(name = "is_collapsed", columnDefinition = "boolean default false")
     private boolean isCollapsed;
@@ -38,6 +38,9 @@ public class Feature extends CommonColumn {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "menu_id", nullable = false)
     private Menu menu;
+
+    @Column(name = "menu_type")
+    private String menuType;    //Main, Sub
 
     @Column(name = "status")
     private String status;
@@ -52,6 +55,7 @@ public class Feature extends CommonColumn {
         this.setType(featureDTO.getType());
         this.setCollapsed(featureDTO.isCollapsed());
         this.setMenu(featureDTO.getMenu());
+        this.setMenuType(featureDTO.getMenuType());
         this.setStatus(featureDTO.getStatus());
     }
 }

@@ -36,6 +36,9 @@ public class FinancialInformation extends CommonColumn {
     @Column(name = "first_year")
     private String firstYear;
 
+    @Column(name = "html_type")
+    private String htmlType;
+
     public FinancialInformation(FinancialInformationDTO financialInformationDTO) {
         this.setId(financialInformationDTO.getId());
         this.setVersion(financialInformationDTO.getVersion());
@@ -44,5 +47,6 @@ public class FinancialInformation extends CommonColumn {
         this.setThirdYear(financialInformationDTO.getThirdYear());
         this.setSecondYear(financialInformationDTO.getSecondYear());
         this.setFirstYear(financialInformationDTO.getFirstYear());
+        this.setHtmlType(financialInformationDTO.getHtmlType());
     }
 }

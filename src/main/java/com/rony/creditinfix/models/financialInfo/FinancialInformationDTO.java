@@ -20,6 +20,7 @@ public class FinancialInformationDTO {
     private String thirdYear;
     private String secondYear;
     private String firstYear;
+    private String htmlType;
 
     public FinancialInformationDTO(FinancialInformation financialInformation) {
         this.setId(financialInformation.getId());
@@ -29,6 +30,7 @@ public class FinancialInformationDTO {
         this.setThirdYear(financialInformation.getThirdYear());
         this.setSecondYear(financialInformation.getSecondYear());
         this.setFirstYear(financialInformation.getFirstYear());
+        this.setHtmlType(financialInformation.getHtmlType());
     }
 
 }

@@ -1,6 +1,7 @@
 package com.rony.creditinfix.services.financialInfo.financialNote;
 
 import com.rony.creditinfix.entity.financialInfo.FinancialNote;
+import com.rony.creditinfix.exception.NotFoundException;
 import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.FinancialNoteDTO;
 import com.rony.creditinfix.repository.financialInfo.FinancialNoteRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -52,12 +54,17 @@ public class FinancialNoteImpl implements FinancialNoteService {
 
     @Override
     public Boolean delete(Long id) throws ServiceException {
-        return null;
+        FinancialNoteDTO financialNoteDTO = this.findById(id);
+        if (financialNoteDTO == null) throw new NotFoundException();
+
+        financialNoteRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public FinancialNoteDTO findById(Long id) throws ServiceException {
-        return null;
+        Optional<FinancialNote> financialNote = financialNoteRepository.findById(id);
+        return financialNote.isEmpty() ? null : new FinancialNoteDTO(financialNote.get());
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.rony.creditinfix.controllers.financialInfo;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.services.financialInfo.companyInfo.CompanyInfoService;
+import com.rony.creditinfix.util.General;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -37,8 +40,9 @@ public class CompanyInfoController {
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            CompanyInfoDTO reqModel = mapper.readValue(companyInfoDTO, CompanyInfoDTO.class);
+//            ObjectMapper mapper = new ObjectMapper();
+//            CompanyInfoDTO reqModel = mapper.readValue(companyInfoDTO, CompanyInfoDTO.class);
+            CompanyInfoDTO reqModel = General.getObjectMapperWithDifferentProperty(companyInfoDTO, CompanyInfoDTO.class);
             response.setData(companyInfoService.create(reqModel));
             response.setMessage(messageSource.getMessage("api.create.success", null, null));
             response.setSuccess(true);
@@ -61,8 +65,7 @@ public class CompanyInfoController {
     public ResponseEntity<Object> update(@RequestParam(value = "companyInfoDTO") String companyInfoDTO) {
         ApiResponse response = new ApiResponse();
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            CompanyInfoDTO reqModel = mapper.readValue(companyInfoDTO, CompanyInfoDTO.class);
+            CompanyInfoDTO reqModel = General.getObjectMapperWithDifferentProperty(companyInfoDTO, CompanyInfoDTO.class);
             if (reqModel.getId() != null) {
                 response.setData(companyInfoService.update(reqModel.getId(), reqModel));
                 response.setMessage(messageSource.getMessage("api.update.success", null, null));

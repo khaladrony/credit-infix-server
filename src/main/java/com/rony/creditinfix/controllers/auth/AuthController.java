@@ -1,5 +1,6 @@
 package com.rony.creditinfix.controllers.auth;
 
+import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.JwtRequest;
 import com.rony.creditinfix.models.JwtResponse;
 import com.rony.creditinfix.security.JwtHelper;
@@ -35,6 +36,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) {
 
+        logger.info("Enter login method :: login :: class :: AuthController");
         this.doAuthenticate(request.getUsername(), request.getPassword());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
@@ -64,4 +66,16 @@ public class AuthController {
     public String exceptionHandler() {
         return "Credential Invalid!";
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<Object> apiTest() {
+        logger.info("API test......success");
+        ApiResponse response = new ApiResponse(false);
+
+        response.setData("API works fine..........");
+        response.setSuccess(true);
+
+       return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
 }

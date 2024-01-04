@@ -20,6 +20,7 @@ public class FeatureDTO {
     private String type;
     private boolean isCollapsed;
     private Menu menu;
+    private String menuType;
     private String status;
 
     public FeatureDTO(Feature feature){
@@ -31,6 +32,7 @@ public class FeatureDTO {
         this.setType(feature.getType());
         this.setCollapsed(feature.isCollapsed());
         this.setMenu(feature.getMenu());
+        this.setMenuType(feature.getMenuType());
         this.setStatus(feature.getStatus());
     }
 }

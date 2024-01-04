@@ -10,6 +10,8 @@ import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.financialInfo.FinancialInformationDTO;
 import com.rony.creditinfix.models.financialInfo.NatureOfBusinessDTO;
 import com.rony.creditinfix.services.financialInfo.financialInformation.FinancialInformationService;
+import com.rony.creditinfix.util.ApplicationConstant;
+import com.rony.creditinfix.util.General;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -40,20 +42,17 @@ public class FinancialInformationController {
     @PostMapping("/save")
     @ApiIgnore
     public ResponseEntity<Object> login(@RequestParam(value = "financialInformationList") String financialInformationList,
-                                        @RequestParam(value = "companyInfoId") String companyInfoId) {
+                                        @RequestParam(value = "companyInfoId") String companyInfoId,
+                                        @RequestParam(value = "submitType") String submitType) {
 
         ApiResponse response = new ApiResponse(false);
 
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-            mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-            List<FinancialInformationDTO> reqModel =
-                    mapper.readValue(financialInformationList, new TypeReference<List<FinancialInformationDTO>>() {
-                    });
+            List<FinancialInformationDTO> reqModel = General.getObjectMapperWithDifferentProperty(financialInformationList, new TypeReference<>() {
+            });
 
             response.setData(financialInformationService.saveAll(reqModel, Long.parseLong(companyInfoId)));
-            response.setMessage(messageSource.getMessage("api.create.success", null, null));
+            response.setMessage(messageSource.getMessage(ApplicationConstant.SUBMIT_TYPE.equalsIgnoreCase(submitType) ? "api.update.success" : "api.create.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
@@ -64,7 +63,7 @@ public class FinancialInformationController {
 
 
     /**
-     * Get Management List
+     * Get Financial Information List
      *
      * @param companyInfoId
      * @return
@@ -75,6 +74,26 @@ public class FinancialInformationController {
         try {
             response.setData(financialInformationService.findAllByCompanyInfoId(companyInfoId));
             response.setMessage(messageSource.getMessage("api.list.success", null, null));
+            response.setSuccess(true);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            response.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    /**
+     * Delete Financial Information
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Object> delete(@RequestParam @Valid Long id) {
+        ApiResponse response = new ApiResponse(false);
+        try {
+            response.setData(financialInformationService.delete(id));
+            response.setMessage(messageSource.getMessage("api.delete.success", null, null));
             response.setSuccess(true);
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
