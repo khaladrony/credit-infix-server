@@ -22,6 +22,10 @@ public class ShareholderImpl implements ShareholderService {
     @Override
     public List<ShareholderDTO> saveAll(List<ShareholderDTO> shareholderDTOS, Long companyInfoId) {
         List<Shareholder> shareholderList = new ArrayList<>();
+
+        //Delete existing entries
+        shareholderRepository.deleteAllByCompanyInfoId(companyInfoId);
+
         for (ShareholderDTO shareholderDTO : shareholderDTOS) {
             Shareholder shareholder = new Shareholder(shareholderDTO);
             shareholderList.add(shareholder);

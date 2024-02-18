@@ -13,3 +13,7 @@ INSERT INTO credit_infix.risk_level (id, created_at, created_by, updated_at, upd
 INSERT INTO credit_infix.risk_level (id, created_at, created_by, updated_at, updated_by, version, category, end_range, remarks, start_range) VALUES (2, '2023-10-08 06:10:26.884000', null, null, null, 0, 'Moderate Risk', 79, 'Risk of dealing is relatively of Moderate Level', 46);
 INSERT INTO credit_infix.risk_level (id, created_at, created_by, updated_at, updated_by, version, category, end_range, remarks, start_range) VALUES (3, '2023-10-08 06:10:26.884000', null, null, null, 0, 'High Risk', 45, 'Risk of dealing is relatively of High Level', 1);
 INSERT INTO credit_infix.risk_level (id, created_at, created_by, updated_at, updated_by, version, category, end_range, remarks, start_range) VALUES (4, '2023-10-08 06:10:26.884000', null, null, null, 0, 'Undetermined', 0, 'Assigned to concerns where there is insufficient information to express any opinion on the condition, financial soundness or payment history of the concern. Caution is advised.', 0);
+
+
+--Date:17-02-2024
+ALTER TABLE financial_summary  MODIFY amount varchar(25);

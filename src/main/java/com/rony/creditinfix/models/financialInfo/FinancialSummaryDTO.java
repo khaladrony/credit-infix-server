@@ -16,7 +16,7 @@ public class FinancialSummaryDTO {
     private int version;
     private String itemCode;
     private String currency;
-    private double amount;
+    private String amount;
     private String comments;
     private CompanyInfo companyInfo;
 

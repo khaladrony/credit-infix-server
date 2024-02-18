@@ -10,6 +10,4 @@ public interface FinancialInformationService extends AbstractService<FinancialIn
     List<FinancialInformationDTO> saveAll(List<FinancialInformationDTO> financialInformationDTOS, Long companyInfoId);
 
     List<FinancialInformationDTO> findAllByCompanyInfoId(Long companyInfoId);
-
-    void deleteAllByCompanyInfoId(Long companyInfoId);
 }

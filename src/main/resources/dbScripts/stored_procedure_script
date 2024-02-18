@@ -167,12 +167,13 @@ BEGIN
   VALUES (NOW(), createdBy, NOW(), null, 0, 'Activity Status:', '', companyInfoId,1),
          (NOW(), createdBy, NOW(), null, 0, 'Activities:', '', companyInfoId,2),
          (NOW(), createdBy, NOW(), null, 0, 'Activities:', '', companyInfoId,2),
-         (NOW(), createdBy, NOW(), null, 0, 'Items Dealing In:', '', companyInfoId,3),
-         (NOW(), createdBy, NOW(), null, 0, 'Export/Import Permit:', '', companyInfoId,4),
-         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms Domestic:', '', companyInfoId,5),
-         (NOW(), createdBy, NOW(), null, 0, 'Purchasing Terms International:', '', companyInfoId,6),
-         (NOW(), createdBy, NOW(), null, 0, 'Export Market:', '', companyInfoId,7),
-         (NOW(), createdBy, NOW(), null, 0, 'Import Form:', '', companyInfoId,8);
+         (NOW(), createdBy, NOW(), null, 0, 'Judicial Record/Legal Action:', '', companyInfoId,3),
+         (NOW(), createdBy, NOW(), null, 0, 'Items Dealing In:', '', companyInfoId,4),
+         (NOW(), createdBy, NOW(), null, 0, 'Export/Import Permit:', '', companyInfoId,5),
+         (NOW(), createdBy, NOW(), null, 0, 'Terms of Purchase:', '', companyInfoId,6),
+         (NOW(), createdBy, NOW(), null, 0, 'Terms of Sale:', '', companyInfoId,7),
+         (NOW(), createdBy, NOW(), null, 0, 'Export Market:', '', companyInfoId,8),
+         (NOW(), createdBy, NOW(), null, 0, 'Import Form:', '', companyInfoId,9);
 
 
 END &&
@@ -213,7 +214,10 @@ BEGIN
          (NOW(), createdBy, NOW(), null, 0, 'Holding Company:', '', companyInfoId,3),
          (NOW(), createdBy, NOW(), null, 0, 'Sister Concern:', '', companyInfoId,4),
          (NOW(), createdBy, NOW(), null, 0, 'Affiliated Companies:', '', companyInfoId,5),
-         (NOW(), createdBy, NOW(), null, 0, 'Adverse Data Monitoring:', '', companyInfoId,6);
+         (NOW(), createdBy, NOW(), null, 0, 'Office Area:', '', companyInfoId,6),
+         (NOW(), createdBy, NOW(), null, 0, 'Warehouse Area:', '', companyInfoId,7),
+         (NOW(), createdBy, NOW(), null, 0, 'Factory Area:', '', companyInfoId,8),
+         (NOW(), createdBy, NOW(), null, 0, 'Member', '', companyInfoId,9);
 
 
 END &&

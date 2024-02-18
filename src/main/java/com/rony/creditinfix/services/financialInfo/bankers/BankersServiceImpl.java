@@ -21,6 +21,10 @@ public class BankersServiceImpl implements BankersService {
     @Override
     public List<BankersDTO> saveAll(List<BankersDTO> bankersDTOS, Long companyInfoId) {
         List<Bankers> bankersList = new ArrayList<>();
+
+        //Delete existing entries
+        bankersRepository.deleteAllByCompanyInfoId(companyInfoId);
+
         for (BankersDTO bankersDTO : bankersDTOS) {
             Bankers bankers = new Bankers(bankersDTO);
             bankersList.add(bankers);

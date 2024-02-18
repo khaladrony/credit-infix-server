@@ -26,7 +26,7 @@ public class FinancialInformationImpl implements FinancialInformationService {
         List<FinancialInformation> financialInformationList = new ArrayList<>();
 
         //delete existing data
-        this.deleteAllByCompanyInfoId(companyInfoId);
+        financialInformationRepository.deleteAllByCompanyInfoId(companyInfoId);
 
         for (FinancialInformationDTO financialInformationDTO : financialInformationDTOS) {
             FinancialInformation corporateStructure = new FinancialInformation(financialInformationDTO);
@@ -45,11 +45,6 @@ public class FinancialInformationImpl implements FinancialInformationService {
             financialInformationDTOS.add(financialInformationDTO);
         }
         return financialInformationDTOS;
-    }
-
-    @Override
-    public void deleteAllByCompanyInfoId(Long companyInfoId) {
-        financialInformationRepository.deleteAllByCompanyInfoId(companyInfoId);
     }
 
     @Override

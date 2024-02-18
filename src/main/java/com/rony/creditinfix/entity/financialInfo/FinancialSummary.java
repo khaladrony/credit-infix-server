@@ -31,7 +31,7 @@ public class FinancialSummary extends CommonColumn {
     private String currency;
 
     @Column(name = "amount")
-    private double amount;
+    private String amount;
 
     @Column(name = "comments")
     private String comments;

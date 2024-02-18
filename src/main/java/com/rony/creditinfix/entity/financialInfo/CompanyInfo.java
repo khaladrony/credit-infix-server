@@ -103,6 +103,34 @@ public class CompanyInfo extends CommonColumn {
     @Column(name = "credit_rating")
     private String creditRating;
 
+    //Basic info
+    @Column(name = "client_name")
+    private String clientName;
+
+    @Column(name = "client_ref_no")
+    private String clientRefNo;
+
+    @Column(name = "infix_ref_no")
+    private String infixRefNo;
+
+    @Column(name = "service_type")
+    private String serviceType;
+
+    @Column(name = "inquiry_date")
+    private Date inquiryDate;
+
+    @Column(name = "due_date")
+    private Date dueDate;
+
+    @Column(name = "delivery_date")
+    private Date deliveryDate;
+
+    @Column(name = "report_date")
+    private Date reportDate;
+
+    @Column(name = "product_name")
+    private String productName;
+
     public CompanyInfo(CompanyInfoDTO companyInfoDTO){
         this.setId(companyInfoDTO.getId());
         this.setVersion(companyInfoDTO.getVersion());
@@ -133,5 +161,14 @@ public class CompanyInfo extends CommonColumn {
         this.setNoOfJudicialRecord(companyInfoDTO.getNoOfJudicialRecord());
         this.setMaximumCredit(companyInfoDTO.getMaximumCredit());
         this.setCreditRating(companyInfoDTO.getCreditRating());
+        this.setClientName(companyInfoDTO.getClientName());
+        this.setClientRefNo(companyInfoDTO.getClientRefNo());
+        this.setInfixRefNo(companyInfoDTO.getInfixRefNo());
+        this.setServiceType(companyInfoDTO.getServiceType());
+        this.setInquiryDate(companyInfoDTO.getInquiryDate());
+        this.setDueDate(companyInfoDTO.getDueDate());
+        this.setDeliveryDate(companyInfoDTO.getDeliveryDate());
+        this.setReportDate(companyInfoDTO.getReportDate());
+        this.setProductName(companyInfoDTO.getProductName());
     }
 }

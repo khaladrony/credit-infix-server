@@ -101,6 +101,9 @@ public class ExcelHelper {
                         case 3:
                             financialInformationDTO.setFirstYear(dataFormatter.formatCellValue(cell));
                             break;
+                        case 4:
+                            financialInformationDTO.setHtmlType(dataFormatter.formatCellValue(cell));
+                            break;
                         default:
                             break;
                     }

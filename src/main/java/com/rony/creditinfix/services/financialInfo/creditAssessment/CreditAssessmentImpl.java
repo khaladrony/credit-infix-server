@@ -45,7 +45,7 @@ public class CreditAssessmentImpl implements CreditAssessmentService {
             creditAssessmentDTO.setGrade(rating.getGrade());
             creditAssessmentDTO.setGradeRange(rating.getStartRange() + "-" + rating.getEndRange());
             creditAssessmentDTO.setCreditRatingStatus(companyInfo.getBusinessScale());
-            creditAssessmentDTO.setRiskStatus(riskLevel.getCategory());
+            creditAssessmentDTO.setRiskStatus(riskLevel != null ? riskLevel.getCategory() : null);
             creditAssessmentDTO.setColorCode(rating.getColorCode());
             creditAssessmentDTO.setPaddingPercent(this.getPaddingPercent(rating.getGrade()));
 
@@ -55,10 +55,10 @@ public class CreditAssessmentImpl implements CreditAssessmentService {
         return creditAssessmentDTO;
     }
 
-    private String getPaddingPercent(String grade){
+    private String getPaddingPercent(String grade) {
 
         int value;
-        switch (grade){
+        switch (grade) {
             case "A":
                 value = 0;
                 break;
@@ -81,6 +81,6 @@ public class CreditAssessmentImpl implements CreditAssessmentService {
                 value = 6;
         }
 
-        return String.valueOf(15*value);
+        return String.valueOf(15 * value);
     }
 }

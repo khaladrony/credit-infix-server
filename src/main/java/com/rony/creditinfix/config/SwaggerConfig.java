@@ -4,6 +4,7 @@ package com.rony.creditinfix.config;
 import com.rony.creditinfix.services.util.ShowAPI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -12,9 +13,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Configuration
 public class SwaggerConfig {
@@ -24,7 +23,12 @@ public class SwaggerConfig {
         String basePackage = "com.rony.creditinfix.controllers.financialInfo";
         String authController = "com.rony.creditinfix.controllers.auth.AuthController";
 
+        final Set<String> produces = new HashSet<String>();
+        produces.add(MediaType.APPLICATION_JSON_VALUE);
+        produces.add(MediaType.APPLICATION_XML_VALUE);
+
         return new Docket(DocumentationType.SWAGGER_2)
+                .produces(produces)
                 .apiInfo(apiInfo())
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))

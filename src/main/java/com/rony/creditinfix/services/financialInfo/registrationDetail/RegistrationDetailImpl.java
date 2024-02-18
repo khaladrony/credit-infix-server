@@ -43,6 +43,9 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
             RegistrationDetailDTO registrationDetailDTO = new RegistrationDetailDTO(registrationDetail);
             registrationDetailDTOS.add(registrationDetailDTO);
         }
+
+        this.setFinancialData(registrationDetailDTOS, companyInfoId);
+
         return registrationDetailDTOS;
     }
 
@@ -140,7 +143,7 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
             for (FinancialSummary finSummary : financialSummaryList) {
                 if (i == j) {
                     detailDTO.setSubItem(finSummary.getItemCode());
-                    detailDTO.setItemValue(detailDTO.getCompanyInfo().getCurrency() + " " + String.format("%.0f", finSummary.getAmount()));
+                    detailDTO.setItemValue(detailDTO.getCompanyInfo().getCurrency() + " " + finSummary.getAmount());
                     break;
                 }
                 j++;

@@ -41,6 +41,15 @@ public class CompanyInfoDTO {
     private String noOfJudicialRecord;
     private String maximumCredit;
     private String creditRating;
+    private String clientName;
+    private String clientRefNo;
+    private String infixRefNo;
+    private String serviceType;
+    private Date inquiryDate;
+    private Date dueDate;
+    private Date deliveryDate;
+    private Date reportDate;
+    private String productName;
 
     public CompanyInfoDTO(CompanyInfo companyInfo){
         this.setId(companyInfo.getId());
@@ -72,5 +81,14 @@ public class CompanyInfoDTO {
         this.setNoOfJudicialRecord(companyInfo.getNoOfJudicialRecord());
         this.setMaximumCredit(companyInfo.getMaximumCredit());
         this.setCreditRating(companyInfo.getCreditRating());
+        this.setClientName(companyInfo.getClientName());
+        this.setClientRefNo(companyInfo.getClientRefNo());
+        this.setInfixRefNo(companyInfo.getInfixRefNo());
+        this.setServiceType(companyInfo.getServiceType());
+        this.setInquiryDate(companyInfo.getInquiryDate());
+        this.setDueDate(companyInfo.getDueDate());
+        this.setDeliveryDate(companyInfo.getDeliveryDate());
+        this.setReportDate(companyInfo.getReportDate());
+        this.setProductName(companyInfo.getProductName());
     }
 }

@@ -37,7 +37,7 @@ public class FinancialInformation extends CommonColumn {
     private String firstYear;
 
     @Column(name = "html_type")
-    private String htmlType;
+    private String htmlType;    //add a constant string 'header'
 
     public FinancialInformation(FinancialInformationDTO financialInformationDTO) {
         this.setId(financialInformationDTO.getId());

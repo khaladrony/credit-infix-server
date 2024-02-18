@@ -22,6 +22,10 @@ public class ManagementImpl implements ManagementService {
     @Override
     public List<ManagementDTO> saveAll(List<ManagementDTO> managementDTOS, Long companyInfoId) {
         List<Management> managementList = new ArrayList<>();
+
+        //Delete existing entries
+        managementRepository.deleteAllByCompanyInfoId(companyInfoId);
+
         for (ManagementDTO managementDTO : managementDTOS) {
             Management management = new Management(managementDTO);
             managementList.add(management);
