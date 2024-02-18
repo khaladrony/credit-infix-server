@@ -37,13 +37,15 @@ public class CreditAssessmentImpl implements CreditAssessmentService {
             rating = ratingRepository.findRatingBetweenRange(Integer.parseInt(companyInfo.getCreditRating()));
             riskLevel = riskLevelRepository.findRiskLevelBetweenRange(Integer.parseInt(companyInfo.getCreditRating()));
 
-            creditAssessmentDTO = new CreditAssessmentDTO();
+            String creditRating = companyInfo.getCreditRating().startsWith("-") ? "" : companyInfo.getCreditRating();
+            String gradeRange = rating.getStartRange() < 0 ? "" : rating.getStartRange() + "-" + rating.getEndRange();
 
+            creditAssessmentDTO = new CreditAssessmentDTO();
             creditAssessmentDTO.setCurrency("USD");
             creditAssessmentDTO.setMaximumCredit(companyInfo.getMaximumCredit());
-            creditAssessmentDTO.setCreditRating(companyInfo.getCreditRating());
+            creditAssessmentDTO.setCreditRating(creditRating);
             creditAssessmentDTO.setGrade(rating.getGrade());
-            creditAssessmentDTO.setGradeRange(rating.getStartRange() + "-" + rating.getEndRange());
+            creditAssessmentDTO.setGradeRange(gradeRange);
             creditAssessmentDTO.setCreditRatingStatus(companyInfo.getBusinessScale());
             creditAssessmentDTO.setRiskStatus(riskLevel != null ? riskLevel.getCategory() : null);
             creditAssessmentDTO.setColorCode(rating.getColorCode());
