@@ -6,6 +6,7 @@ import com.rony.creditinfix.models.JwtResponse;
 import com.rony.creditinfix.security.JwtHelper;
 import com.rony.creditinfix.services.JwtUserDetailsService;
 import com.rony.creditinfix.services.util.ShowAPI;
+import com.rony.creditinfix.util.SpringSecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private JwtHelper jwtHelper;
+    @Autowired
+    private SpringSecurityUtil springSecurityUtil;
 
     private Logger logger = LoggerFactory.getLogger(AuthController.class);
 
@@ -69,6 +72,7 @@ public class AuthController {
 
     @GetMapping("/test")
     public ResponseEntity<Object> apiTest() {
+        Long createdBy = springSecurityUtil.getLoggedInUserId();
         logger.info("API test......success");
         ApiResponse response = new ApiResponse(false);
 

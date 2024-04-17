@@ -3,6 +3,7 @@ package com.rony.creditinfix.services;
 
 import com.rony.creditinfix.entity.auth.User;
 import com.rony.creditinfix.repository.auth.UserRepository;
+import com.rony.creditinfix.services.auth.userDetails.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,7 @@ public class JwtUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        return new org.springframework.security.core.userdetails.User
-                (user.get().getUsername(), user.get().getPassword(), new ArrayList<>());
+        return UserDetailsImpl.build(user.get());
     }
 
 

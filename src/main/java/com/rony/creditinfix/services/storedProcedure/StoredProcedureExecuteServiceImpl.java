@@ -1,5 +1,6 @@
 package com.rony.creditinfix.services.storedProcedure;
 
+import com.rony.creditinfix.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,11 +16,13 @@ public class StoredProcedureExecuteServiceImpl implements StoredProcedureExecute
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    SpringSecurityUtil springSecurityUtil;
 
     @Override
     public String execute(String templateName, Long companyInfoId) {
-//        Long createdBy = springSecurityUtil.getLoggedInUserId();
-        Long createdBy = 1L;
+        Long createdBy = springSecurityUtil.getLoggedInUserId();
+//        Long createdBy = 1L;
 
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("insert_template_data");
