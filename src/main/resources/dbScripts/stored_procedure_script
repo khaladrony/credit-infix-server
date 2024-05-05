@@ -312,7 +312,8 @@ BEGIN
 
 END &&
 DELIMITER ;
----------------------------------------------------------------------------
+
+-- ==============================insert_template_data===============================
 
 DELIMITER &&
 DROP PROCEDURE IF EXISTS insert_template_data;
@@ -350,6 +351,52 @@ BEGIN
     WHEN 'summary_opinion' THEN
       CALL insert_summary_opinion(companyInfoId, createdBy);
     END CASE;
+
+END &&
+DELIMITER ;
+
+-- ==================================== get_company_info_report_data =====================
+
+DELIMITER &&
+DROP PROCEDURE IF EXISTS get_company_info_report_data;
+CREATE PROCEDURE get_company_info_report_data (IN companyInfoId Long)
+BEGIN
+  CREATE TEMPORARY TABLE company_info_data AS SELECT * FROM company_info WHERE id = companyInfoId;
+  CREATE TEMPORARY TABLE financial_summary_data AS SELECT * FROM financial_summary WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE risk_profile_data AS SELECT * FROM risk_profile WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE order_detail_data AS SELECT * FROM order_detail WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE contact_data AS SELECT * FROM contact WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE location_data AS SELECT * FROM location WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE registration_detail_data AS SELECT * FROM registration_detail WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE management_data AS SELECT * FROM management WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE shareholder_data AS SELECT * FROM shareholder WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE operation_info_data AS SELECT * FROM operation_info WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE nature_of_business_data AS SELECT * FROM nature_of_business WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE corporate_structure_data AS SELECT * FROM corporate_structure WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE bankers_data AS SELECT * FROM bankers WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE financial_information_data AS SELECT * FROM financial_information WHERE company_info_id = companyInfoId;
+  CREATE TEMPORARY TABLE summary_opinion_data AS SELECT * FROM summary_opinion WHERE company_info_id = companyInfoId;
+
+  SELECT * FROM company_info_data;
+  SELECT * FROM financial_summary_data;
+  SELECT * FROM risk_profile_data;
+  SELECT * FROM order_detail_data;
+  SELECT * FROM contact_data;
+  SELECT * FROM location_data;
+  SELECT * FROM registration_detail_data;
+  SELECT * FROM management_data;
+  SELECT * FROM shareholder_data;
+  SELECT * FROM operation_info_data;
+  SELECT * FROM nature_of_business_data;
+  SELECT * FROM corporate_structure_data;
+  SELECT * FROM bankers_data;
+  SELECT * FROM financial_information_data;
+  SELECT * FROM summary_opinion_data;
+
+  DROP TEMPORARY TABLE IF EXISTS company_info_data, financial_summary_data,
+    risk_profile_data, order_detail_data, contact_data, location_data,registration_detail_data, management_data,
+    shareholder_data,operation_info_data,nature_of_business_data,corporate_structure_data,
+    bankers_data,financial_information_data,summary_opinion_data;
 
 END &&
 DELIMITER ;

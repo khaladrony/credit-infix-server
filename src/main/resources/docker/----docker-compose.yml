@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    container_name: mysqldb
+#    image: mysql:8.0.36
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: credit_infix
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql-springboot-network
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/credit_infix.sql:/docker-entrypoint-initdb.d/credit_infix.sql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -proot"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  springbootapp:
+    container_name: springbootapp
+    build:
+      context: ../../../../
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8080"
+    networks:
+      - mysql-springboot-network
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+#    restart: on-failure
+#
+#  angularapp:
+#    image: tomcat:9.0.82
+#    container_name: angularapp
+#    ports:
+#      - 8088:8080
+#    volumes:
+#      - ./target/frontend/webapps:/usr/local/tomcat/webapps
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  mysql-springboot-network:

@@ -1,0 +1,19 @@
+<!-- logback.xml -->
+<configuration>
+
+    <!-- Define the appenders -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Define the root logger -->
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <!-- Configure specific logger for AuditAspect -->
+    <logger name="com.rony.creditinfix.aspects.AuditAspect" level="info"/>
+
+</configuration>

@@ -3,6 +3,7 @@ package com.rony.creditinfix.models.financialInfo;
 
 import com.rony.creditinfix.entity.financialInfo.CompanyInfo;
 import com.rony.creditinfix.entity.financialInfo.RegistrationDetail;
+import com.rony.creditinfix.models.CommonColumnDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrationDetailDTO {
-
-    private Long id;
-    private int version;
+public class RegistrationDetailDTO extends CommonColumnDTO {
     private CompanyInfo companyInfo;
     private String item;
     private String subItem;

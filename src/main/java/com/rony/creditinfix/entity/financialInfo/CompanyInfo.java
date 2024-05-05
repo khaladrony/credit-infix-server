@@ -170,5 +170,9 @@ public class CompanyInfo extends CommonColumn {
         this.setDeliveryDate(companyInfoDTO.getDeliveryDate());
         this.setReportDate(companyInfoDTO.getReportDate());
         this.setProductName(companyInfoDTO.getProductName());
+        this.setCreatedBy(companyInfoDTO.getCreatedBy());
+        this.setCreatedAt(companyInfoDTO.getCreatedAt());
+        this.setUpdatedBy(companyInfoDTO.getUpdatedBy());
+        this.setUpdatedAt(companyInfoDTO.getUpdatedAt());
     }
 }

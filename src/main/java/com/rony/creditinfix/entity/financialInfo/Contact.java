@@ -25,7 +25,7 @@ public class Contact extends CommonColumn {
     @Column(name = "telephone_no")
     private String telephoneNo;
 
-    @Column(name = "faxNo")
+    @Column(name = "fax_no")
     private String faxNo;
 
     @Column(name = "email")

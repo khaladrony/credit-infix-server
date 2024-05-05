@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FinancialSummaryService extends AbstractService<FinancialSummaryDTO> {
 
-    public List<FinancialSummaryDTO> saveAll(List<FinancialSummaryDTO> financialSummaryDTOS, Long companyInfoId);
+    List<FinancialSummaryDTO> saveAll(List<FinancialSummaryDTO> financialSummaryDTOS, Long companyInfoId);
 
-    public List<FinancialSummaryDTO> findAllByCompanyInfoId(Long companyInfoId);
+    List<FinancialSummaryDTO> findAllByCompanyInfoId(Long companyInfoId);
 }

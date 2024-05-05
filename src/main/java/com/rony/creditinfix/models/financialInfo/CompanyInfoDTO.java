@@ -2,18 +2,18 @@ package com.rony.creditinfix.models.financialInfo;
 
 
 import com.rony.creditinfix.entity.financialInfo.CompanyInfo;
+import com.rony.creditinfix.models.CommonColumnDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyInfoDTO {
-    private Long id;
-    private int version;
+public class CompanyInfoDTO extends CommonColumnDTO {
     private Date transactionDate;
     private String name;
     private String legalAddress;
@@ -50,6 +50,10 @@ public class CompanyInfoDTO {
     private Date deliveryDate;
     private Date reportDate;
     private String productName;
+    private Long createdBy;
+    private Calendar createdAt;
+    private Long updatedBy;
+    private Calendar updatedAt;
 
     public CompanyInfoDTO(CompanyInfo companyInfo){
         this.setId(companyInfo.getId());
@@ -90,5 +94,9 @@ public class CompanyInfoDTO {
         this.setDeliveryDate(companyInfo.getDeliveryDate());
         this.setReportDate(companyInfo.getReportDate());
         this.setProductName(companyInfo.getProductName());
+        this.setCreatedBy(companyInfo.getCreatedBy());
+        this.setCreatedAt(companyInfo.getCreatedAt());
+        this.setUpdatedBy(companyInfo.getUpdatedBy());
+        this.setUpdatedAt(companyInfo.getUpdatedAt());
     }
 }

@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  springbootapp:
+    container_name: springbootapp
+    build:
+      context: ../../../../
+      dockerfile: Dockerfile
+    ports:
+      - 8089:8089
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/${MYSQL_DATABASE}
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
+    networks:
+      - springboot-mysql-network
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/credit_infix.sql:/docker-entrypoint-initdb.d/credit_infix.sql
+    networks:
+      - springboot-mysql-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+volumes:
+  db:
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network

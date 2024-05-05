@@ -1,6 +1,7 @@
 package com.rony.creditinfix.models.financialInfo;
 
 import com.rony.creditinfix.entity.financialInfo.CurrencyDailyRate;
+import com.rony.creditinfix.models.CommonColumnDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrencyDailyRateDTO {
-    private Long id;
-    private int version;
+public class CurrencyDailyRateDTO extends CommonColumnDTO {
     private Long countryId;
     private String currency;
     private double currencyRate;

@@ -2,6 +2,8 @@ package com.rony.creditinfix.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -299,5 +301,9 @@ public class DateUtil {
         calendar.setTime(date);
         return calendar;
 
+    }
+
+    public static Date getDateFromLocalDateTime(LocalDateTime localDateTime){
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 }
