@@ -2,7 +2,6 @@ package com.rony.creditinfix.services.financialInfo.currencyDailyRate;
 
 
 import com.rony.creditinfix.entity.financialInfo.CurrencyDailyRate;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.CurrencyDailyRateDTO;
 import com.rony.creditinfix.repository.financialInfo.CurrencyDailyRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,22 +44,22 @@ public class CurrencyDailyRateImpl implements CurrencyDailyRateService {
     }
 
     @Override
-    public CurrencyDailyRateDTO create(CurrencyDailyRateDTO currencyDailyRateDTO) throws ServiceException {
+    public CurrencyDailyRateDTO create(CurrencyDailyRateDTO currencyDailyRateDTO) {
         return null;
     }
 
     @Override
-    public CurrencyDailyRateDTO update(Long id, CurrencyDailyRateDTO currencyDailyRateDTO) throws ServiceException {
+    public CurrencyDailyRateDTO update(Long id, CurrencyDailyRateDTO currencyDailyRateDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public CurrencyDailyRateDTO findById(Long id) throws ServiceException {
+    public CurrencyDailyRateDTO findById(Long id) {
         return null;
     }
 

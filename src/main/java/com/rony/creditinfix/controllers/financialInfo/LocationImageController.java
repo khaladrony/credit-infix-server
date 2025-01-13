@@ -1,25 +1,15 @@
 package com.rony.creditinfix.controllers.financialInfo;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rony.creditinfix.entity.ImageUpload;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.ApiResponse;
-import com.rony.creditinfix.models.ImageUploadDTO;
-import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.models.financialInfo.LocationImageDTO;
 import com.rony.creditinfix.services.financialInfo.locationImage.LocationImageService;
 import com.rony.creditinfix.util.General;
-import lombok.experimental.PackagePrivate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin

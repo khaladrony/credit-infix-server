@@ -23,7 +23,7 @@ public class MenuServiceImpl implements MenuService{
 
 
     @Override
-    public MenuDTO create(MenuDTO menuDTO) throws ServiceException {
+    public MenuDTO create(MenuDTO menuDTO) {
         Menu menu = new Menu(menuDTO);
 
         this.duplicateCheck(menuDTO, "save");
@@ -31,7 +31,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public MenuDTO update(Long id, MenuDTO menuDTO) throws ServiceException {
+    public MenuDTO update(Long id, MenuDTO menuDTO) {
         MenuDTO _menuDTO = this.findById(id);
         if (_menuDTO == null) throw new NotFoundException();
 
@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         MenuDTO menuDTO = this.findById(id);
         if (menuDTO == null) throw new NotFoundException();
 
@@ -55,7 +55,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public MenuDTO findById(Long id) throws ServiceException {
+    public MenuDTO findById(Long id) {
         Optional<Menu> menuData = menuRepository.findById(id);
         return menuData.isEmpty() ? null : new MenuDTO(menuData.get());
     }

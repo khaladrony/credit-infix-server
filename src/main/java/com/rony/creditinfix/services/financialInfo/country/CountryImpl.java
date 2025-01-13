@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.country;
 
 import com.rony.creditinfix.entity.financialInfo.Country;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.CountryDTO;
 import com.rony.creditinfix.repository.financialInfo.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +29,22 @@ public class CountryImpl implements CountryService {
     }
 
     @Override
-    public CountryDTO create(CountryDTO countryDTO) throws ServiceException {
+    public CountryDTO create(CountryDTO countryDTO) {
         return null;
     }
 
     @Override
-    public CountryDTO update(Long id, CountryDTO countryDTO) throws ServiceException {
+    public CountryDTO update(Long id, CountryDTO countryDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public CountryDTO findById(Long id) throws ServiceException {
+    public CountryDTO findById(Long id) {
         return null;
     }
 

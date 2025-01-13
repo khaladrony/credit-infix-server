@@ -3,7 +3,6 @@ package com.rony.creditinfix.services.financialInfo.location;
 
 import com.rony.creditinfix.entity.financialInfo.Location;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.LocationDTO;
 import com.rony.creditinfix.repository.financialInfo.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +43,17 @@ public class LocationImpl implements LocationService {
     }
 
     @Override
-    public LocationDTO create(LocationDTO locationDTO) throws ServiceException {
+    public LocationDTO create(LocationDTO locationDTO) {
         return null;
     }
 
     @Override
-    public LocationDTO update(Long id, LocationDTO locationDTO) throws ServiceException {
+    public LocationDTO update(Long id, LocationDTO locationDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         LocationDTO locationDTO = this.findById(id);
         if (locationDTO == null) throw new NotFoundException();
 
@@ -63,7 +62,7 @@ public class LocationImpl implements LocationService {
     }
 
     @Override
-    public LocationDTO findById(Long id) throws ServiceException {
+    public LocationDTO findById(Long id) {
         Optional<Location> location = locationRepository.findById(id);
         return location.isEmpty() ? null : new LocationDTO(location.get());
     }

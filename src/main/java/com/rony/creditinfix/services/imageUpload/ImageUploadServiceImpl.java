@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.imageUpload;
 
 import com.rony.creditinfix.entity.ImageUpload;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.ImageUploadDTO;
 import com.rony.creditinfix.repository.ImageUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,23 +28,23 @@ public class ImageUploadServiceImpl implements ImageUploadService {
     }
 
     @Override
-    public ImageUploadDTO create(ImageUploadDTO imageUploadDTO) throws ServiceException {
+    public ImageUploadDTO create(ImageUploadDTO imageUploadDTO) {
         imageUploadRepository.save(new ImageUpload(imageUploadDTO));
         return imageUploadDTO;
     }
 
     @Override
-    public ImageUploadDTO update(Long id, ImageUploadDTO imageUploadDTO) throws ServiceException {
+    public ImageUploadDTO update(Long id, ImageUploadDTO imageUploadDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public ImageUploadDTO findById(Long id) throws ServiceException {
+    public ImageUploadDTO findById(Long id) {
         return null;
     }
 

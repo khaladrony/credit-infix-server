@@ -1,8 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.riskProfile;
 
 import com.rony.creditinfix.entity.financialInfo.RiskProfile;
-import com.rony.creditinfix.exception.ServiceException;
-import com.rony.creditinfix.models.financialInfo.ManagementDTO;
 import com.rony.creditinfix.models.financialInfo.RiskProfileDTO;
 import com.rony.creditinfix.repository.financialInfo.RiskProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,22 +40,22 @@ public class RiskProfileImpl implements RiskProfileService {
     }
 
     @Override
-    public RiskProfileDTO create(RiskProfileDTO riskProfileDTO) throws ServiceException {
+    public RiskProfileDTO create(RiskProfileDTO riskProfileDTO) {
         return null;
     }
 
     @Override
-    public RiskProfileDTO update(Long id, RiskProfileDTO riskProfileDTO) throws ServiceException {
+    public RiskProfileDTO update(Long id, RiskProfileDTO riskProfileDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public RiskProfileDTO findById(Long id) throws ServiceException {
+    public RiskProfileDTO findById(Long id) {
         return null;
     }
 

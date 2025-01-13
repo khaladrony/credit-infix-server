@@ -2,7 +2,6 @@ package com.rony.creditinfix.services.financialInfo.orderDetail;
 
 import com.rony.creditinfix.entity.financialInfo.OrderDetail;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.OrderDetailDTO;
 import com.rony.creditinfix.repository.financialInfo.OrderDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +43,17 @@ public class OrderDetailImpl implements OrderDetailService {
     }
 
     @Override
-    public OrderDetailDTO create(OrderDetailDTO orderDetailDTO) throws ServiceException {
+    public OrderDetailDTO create(OrderDetailDTO orderDetailDTO) {
         return null;
     }
 
     @Override
-    public OrderDetailDTO update(Long id, OrderDetailDTO orderDetailDTO) throws ServiceException {
+    public OrderDetailDTO update(Long id, OrderDetailDTO orderDetailDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         OrderDetailDTO orderDetailDTO = this.findById(id);
         if (orderDetailDTO == null) throw new NotFoundException();
 
@@ -63,7 +62,7 @@ public class OrderDetailImpl implements OrderDetailService {
     }
 
     @Override
-    public OrderDetailDTO findById(Long id) throws ServiceException {
+    public OrderDetailDTO findById(Long id) {
         Optional<OrderDetail> orderDetail = orderDetailRepository.findById(id);
         return orderDetail.isEmpty() ? null : new OrderDetailDTO(orderDetail.get());
     }

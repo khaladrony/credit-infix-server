@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDTO create(UserDTO userDTO) throws ServiceException {
+    public UserDTO create(UserDTO userDTO) {
         User user = new User(userDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO update(Long id, UserDTO userDTO) throws ServiceException {
+    public UserDTO update(Long id, UserDTO userDTO) {
         UserDTO _UserDTO = this.findById(id);
         if (_UserDTO == null) throw new NotFoundException();
 
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         UserDTO userDTO = this.findById(id);
         if (userDTO == null) throw new NotFoundException();
 

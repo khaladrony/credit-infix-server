@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.corporateStructure;
 
 import com.rony.creditinfix.entity.financialInfo.CorporateStructure;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.CorporateStructureDTO;
 import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
 import com.rony.creditinfix.repository.financialInfo.CorporateStructureRepository;
@@ -86,22 +85,22 @@ public class CorporateStructureImpl implements CorporateStructureService {
     }
 
     @Override
-    public CorporateStructureDTO create(CorporateStructureDTO corporateStructureDTO) throws ServiceException {
+    public CorporateStructureDTO create(CorporateStructureDTO corporateStructureDTO) {
         return null;
     }
 
     @Override
-    public CorporateStructureDTO update(Long id, CorporateStructureDTO corporateStructureDTO) throws ServiceException {
+    public CorporateStructureDTO update(Long id, CorporateStructureDTO corporateStructureDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public CorporateStructureDTO findById(Long id) throws ServiceException {
+    public CorporateStructureDTO findById(Long id) {
         return null;
     }
 

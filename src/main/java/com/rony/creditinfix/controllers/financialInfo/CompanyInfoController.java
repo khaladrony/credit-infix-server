@@ -1,8 +1,6 @@
 package com.rony.creditinfix.controllers.financialInfo;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rony.creditinfix.models.ApiResponse;
 import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.services.financialInfo.companyInfo.CompanyInfoService;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
-import java.util.List;
 
 @RestController
 @CrossOrigin

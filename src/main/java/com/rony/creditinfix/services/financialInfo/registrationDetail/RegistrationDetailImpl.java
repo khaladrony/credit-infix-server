@@ -4,7 +4,6 @@ package com.rony.creditinfix.services.financialInfo.registrationDetail;
 import com.rony.creditinfix.entity.financialInfo.FinancialSummary;
 import com.rony.creditinfix.entity.financialInfo.RegistrationDetail;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.RegistrationDetailDTO;
 import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
 import com.rony.creditinfix.repository.financialInfo.FinancialSummaryRepository;
@@ -96,17 +95,17 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
     }
 
     @Override
-    public RegistrationDetailDTO create(RegistrationDetailDTO registrationDetailDTO) throws ServiceException {
+    public RegistrationDetailDTO create(RegistrationDetailDTO registrationDetailDTO) {
         return null;
     }
 
     @Override
-    public RegistrationDetailDTO update(Long id, RegistrationDetailDTO registrationDetailDTO) throws ServiceException {
+    public RegistrationDetailDTO update(Long id, RegistrationDetailDTO registrationDetailDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         RegistrationDetailDTO registrationDetailDTO = this.findById(id);
         if (registrationDetailDTO == null) throw new NotFoundException();
 
@@ -115,7 +114,7 @@ public class RegistrationDetailImpl implements RegistrationDetailService {
     }
 
     @Override
-    public RegistrationDetailDTO findById(Long id) throws ServiceException {
+    public RegistrationDetailDTO findById(Long id) {
         Optional<RegistrationDetail> registrationDetail = registrationDetailRepository.findById(id);
         return registrationDetail.isEmpty() ? null : new RegistrationDetailDTO(registrationDetail.get());
     }

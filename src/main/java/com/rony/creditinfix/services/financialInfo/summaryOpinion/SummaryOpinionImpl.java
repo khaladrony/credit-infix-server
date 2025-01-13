@@ -1,8 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.summaryOpinion;
 
 import com.rony.creditinfix.entity.financialInfo.SummaryOpinion;
-import com.rony.creditinfix.exception.ServiceException;
-import com.rony.creditinfix.models.financialInfo.OrderDetailDTO;
 import com.rony.creditinfix.models.financialInfo.SummaryOpinionDTO;
 import com.rony.creditinfix.repository.financialInfo.SummaryOpinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,22 +40,22 @@ public class SummaryOpinionImpl implements SummaryOpinionService {
     }
 
     @Override
-    public SummaryOpinionDTO create(SummaryOpinionDTO summaryOpinionDTO) throws ServiceException {
+    public SummaryOpinionDTO create(SummaryOpinionDTO summaryOpinionDTO) {
         return null;
     }
 
     @Override
-    public SummaryOpinionDTO update(Long id, SummaryOpinionDTO summaryOpinionDTO) throws ServiceException {
+    public SummaryOpinionDTO update(Long id, SummaryOpinionDTO summaryOpinionDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public SummaryOpinionDTO findById(Long id) throws ServiceException {
+    public SummaryOpinionDTO findById(Long id) {
         return null;
     }
 

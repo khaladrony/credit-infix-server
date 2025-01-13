@@ -2,7 +2,6 @@ package com.rony.creditinfix.services.financialInfo.operationInfo;
 
 import com.rony.creditinfix.entity.financialInfo.OperationInfo;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.OperationInfoDTO;
 import com.rony.creditinfix.models.financialInfo.ReportDataDTO;
 import com.rony.creditinfix.repository.financialInfo.OperationInfoRepository;
@@ -88,17 +87,17 @@ public class OperationInfoImpl implements OperationInfoService {
     }
 
     @Override
-    public OperationInfoDTO create(OperationInfoDTO operationInfoDTO) throws ServiceException {
+    public OperationInfoDTO create(OperationInfoDTO operationInfoDTO) {
         return null;
     }
 
     @Override
-    public OperationInfoDTO update(Long id, OperationInfoDTO operationInfoDTO) throws ServiceException {
+    public OperationInfoDTO update(Long id, OperationInfoDTO operationInfoDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         OperationInfoDTO operationInfoDTO = this.findById(id);
         if (operationInfoDTO == null) throw new NotFoundException();
 
@@ -107,7 +106,7 @@ public class OperationInfoImpl implements OperationInfoService {
     }
 
     @Override
-    public OperationInfoDTO findById(Long id) throws ServiceException {
+    public OperationInfoDTO findById(Long id) {
         Optional<OperationInfo> operationInfo = operationInfoRepository.findById(id);
         return operationInfo.isEmpty() ? null : new OperationInfoDTO(operationInfo.get());
 

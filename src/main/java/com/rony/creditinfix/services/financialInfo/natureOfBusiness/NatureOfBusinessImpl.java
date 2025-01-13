@@ -2,9 +2,7 @@ package com.rony.creditinfix.services.financialInfo.natureOfBusiness;
 
 import com.rony.creditinfix.entity.financialInfo.NatureOfBusiness;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.NatureOfBusinessDTO;
-import com.rony.creditinfix.models.financialInfo.OperationInfoDTO;
 import com.rony.creditinfix.repository.financialInfo.NatureOfBusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,17 +41,17 @@ public class NatureOfBusinessImpl implements NatureOfBusinessService {
     }
 
     @Override
-    public NatureOfBusinessDTO create(NatureOfBusinessDTO natureOfBusinessDTO) throws ServiceException {
+    public NatureOfBusinessDTO create(NatureOfBusinessDTO natureOfBusinessDTO) {
         return null;
     }
 
     @Override
-    public NatureOfBusinessDTO update(Long id, NatureOfBusinessDTO natureOfBusinessDTO) throws ServiceException {
+    public NatureOfBusinessDTO update(Long id, NatureOfBusinessDTO natureOfBusinessDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         NatureOfBusinessDTO natureOfBusinessDTO = this.findById(id);
         if (natureOfBusinessDTO == null) throw new NotFoundException();
 
@@ -62,7 +60,7 @@ public class NatureOfBusinessImpl implements NatureOfBusinessService {
     }
 
     @Override
-    public NatureOfBusinessDTO findById(Long id) throws ServiceException {
+    public NatureOfBusinessDTO findById(Long id) {
         Optional<NatureOfBusiness> natureOfBusiness = natureOfBusinessRepository.findById(id);
         return natureOfBusiness.isEmpty() ? null : new NatureOfBusinessDTO(natureOfBusiness.get());
 

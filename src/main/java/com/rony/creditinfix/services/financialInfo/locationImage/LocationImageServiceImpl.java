@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.locationImage;
 
 import com.rony.creditinfix.entity.financialInfo.LocationImage;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.LocationImageDTO;
 import com.rony.creditinfix.repository.financialInfo.LocationImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LocationImageServiceImpl implements LocationImageService {
@@ -29,7 +27,7 @@ public class LocationImageServiceImpl implements LocationImageService {
     }
 
     @Override
-    public LocationImageDTO create(LocationImageDTO locationImageDTO) throws ServiceException {
+    public LocationImageDTO create(LocationImageDTO locationImageDTO) {
         LocationImageDTO locationImageDTOExists = findByCompanyInfoId(locationImageDTO.getCompanyInfo().getId());
         if (locationImageDTOExists == null) {
             locationImageRepository.save(new LocationImage(locationImageDTO));
@@ -43,18 +41,18 @@ public class LocationImageServiceImpl implements LocationImageService {
     }
 
     @Override
-    public LocationImageDTO update(Long id, LocationImageDTO locationImageDTO) throws ServiceException {
+    public LocationImageDTO update(Long id, LocationImageDTO locationImageDTO) {
         locationImageRepository.save(new LocationImage(locationImageDTO));
         return locationImageDTO;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public LocationImageDTO findById(Long id) throws ServiceException {
+    public LocationImageDTO findById(Long id) {
         return null;
     }
 

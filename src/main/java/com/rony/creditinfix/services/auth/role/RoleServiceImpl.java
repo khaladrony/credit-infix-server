@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
     RoleRepository roleRepository;
 
     @Override
-    public RoleDTO create(RoleDTO roleDTO) throws ServiceException {
+    public RoleDTO create(RoleDTO roleDTO) {
         Role role = new Role(roleDTO);
 
         this.duplicateCheck(roleDTO, "save");
@@ -33,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleDTO update(Long id, RoleDTO roleDTO) throws ServiceException {
+    public RoleDTO update(Long id, RoleDTO roleDTO) {
         RoleDTO _roleDTO = this.findById(id);
         if (_roleDTO == null) throw new NotFoundException();
 
@@ -48,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         RoleDTO roleDTO = this.findById(id);
         if (roleDTO == null) throw new NotFoundException();
 

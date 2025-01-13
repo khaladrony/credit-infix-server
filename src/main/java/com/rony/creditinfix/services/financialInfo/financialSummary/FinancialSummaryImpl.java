@@ -1,9 +1,7 @@
 package com.rony.creditinfix.services.financialInfo.financialSummary;
 
-import com.rony.creditinfix.entity.financialInfo.CompanyInfo;
 import com.rony.creditinfix.entity.financialInfo.FinancialSummary;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.FinancialSummaryDTO;
 import com.rony.creditinfix.repository.financialInfo.FinancialSummaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +22,17 @@ public class FinancialSummaryImpl implements FinancialSummaryService {
 
 
     @Override
-    public FinancialSummaryDTO create(FinancialSummaryDTO financialSummaryDTO) throws ServiceException {
+    public FinancialSummaryDTO create(FinancialSummaryDTO financialSummaryDTO) {
         return null;
     }
 
     @Override
-    public FinancialSummaryDTO update(Long id, FinancialSummaryDTO financialSummaryDTO) throws ServiceException {
+    public FinancialSummaryDTO update(Long id, FinancialSummaryDTO financialSummaryDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         FinancialSummaryDTO financialSummaryDTO = this.findById(id);
         if (financialSummaryDTO == null) throw new NotFoundException();
 
@@ -43,7 +41,7 @@ public class FinancialSummaryImpl implements FinancialSummaryService {
     }
 
     @Override
-    public FinancialSummaryDTO findById(Long id) throws ServiceException {
+    public FinancialSummaryDTO findById(Long id) {
         Optional<FinancialSummary> financialSummary = financialSummaryRepository.findById(id);
         return financialSummary.isEmpty() ? null : new FinancialSummaryDTO(financialSummary.get());
     }

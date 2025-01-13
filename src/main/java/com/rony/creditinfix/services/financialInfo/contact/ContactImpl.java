@@ -2,7 +2,6 @@ package com.rony.creditinfix.services.financialInfo.contact;
 
 import com.rony.creditinfix.entity.financialInfo.Contact;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.ContactDTO;
 import com.rony.creditinfix.repository.financialInfo.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +19,14 @@ public class ContactImpl implements ContactService {
     ContactRepository contactRepository;
 
     @Override
-    public ContactDTO create(ContactDTO contactDTO) throws ServiceException {
+    public ContactDTO create(ContactDTO contactDTO) {
         Contact contact = new Contact(contactDTO);
 
         return new ContactDTO(contactRepository.save(contact));
     }
 
     @Override
-    public ContactDTO update(Long id, ContactDTO contactDTO) throws ServiceException {
+    public ContactDTO update(Long id, ContactDTO contactDTO) {
         ContactDTO _contactDTO = this.findById(id);
         if (_contactDTO == null) throw new NotFoundException();
 
@@ -38,12 +37,12 @@ public class ContactImpl implements ContactService {
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public ContactDTO findById(Long id) throws ServiceException {
+    public ContactDTO findById(Long id) {
         Optional<Contact> contact = contactRepository.findById(id);
         return contact.isPresent() ? new ContactDTO(contact.orElse(null)) : null;
     }

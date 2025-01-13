@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.management;
 
 import com.rony.creditinfix.entity.financialInfo.Management;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.ManagementDTO;
 import com.rony.creditinfix.repository.financialInfo.ManagementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +45,22 @@ public class ManagementImpl implements ManagementService {
     }
 
     @Override
-    public ManagementDTO create(ManagementDTO managementDTO) throws ServiceException {
+    public ManagementDTO create(ManagementDTO managementDTO) {
         return null;
     }
 
     @Override
-    public ManagementDTO update(Long id, ManagementDTO managementDTO) throws ServiceException {
+    public ManagementDTO update(Long id, ManagementDTO managementDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public ManagementDTO findById(Long id) throws ServiceException {
+    public ManagementDTO findById(Long id) {
         return null;
     }
 

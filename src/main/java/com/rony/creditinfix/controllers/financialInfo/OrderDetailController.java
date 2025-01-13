@@ -1,15 +1,9 @@
 package com.rony.creditinfix.controllers.financialInfo;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 import com.rony.creditinfix.models.ApiResponse;
-import com.rony.creditinfix.models.financialInfo.FinancialSummaryDTO;
 import com.rony.creditinfix.models.financialInfo.OrderDetailDTO;
-import com.rony.creditinfix.repository.financialInfo.OrderDetailRepository;
 import com.rony.creditinfix.services.financialInfo.orderDetail.OrderDetailService;
 import com.rony.creditinfix.util.ApplicationConstant;
 import com.rony.creditinfix.util.General;

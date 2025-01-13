@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.rating;
 
 import com.rony.creditinfix.entity.financialInfo.Rating;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.RatingDTO;
 import com.rony.creditinfix.repository.financialInfo.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +20,22 @@ public class RatingImpl implements RatingService {
     RatingRepository ratingRepository;
 
     @Override
-    public RatingDTO create(RatingDTO ratingDTO) throws ServiceException {
+    public RatingDTO create(RatingDTO ratingDTO) {
         return null;
     }
 
     @Override
-    public RatingDTO update(Long id, RatingDTO ratingDTO) throws ServiceException {
+    public RatingDTO update(Long id, RatingDTO ratingDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public RatingDTO findById(Long id) throws ServiceException {
+    public RatingDTO findById(Long id) {
         return null;
     }
 

@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.shareholder;
 
 import com.rony.creditinfix.entity.financialInfo.Shareholder;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.ShareholderDTO;
 import com.rony.creditinfix.repository.financialInfo.ShareholderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,22 +45,22 @@ public class ShareholderImpl implements ShareholderService {
     }
 
     @Override
-    public ShareholderDTO create(ShareholderDTO shareholderDTO) throws ServiceException {
+    public ShareholderDTO create(ShareholderDTO shareholderDTO) {
         return null;
     }
 
     @Override
-    public ShareholderDTO update(Long id, ShareholderDTO shareholderDTO) throws ServiceException {
+    public ShareholderDTO update(Long id, ShareholderDTO shareholderDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public ShareholderDTO findById(Long id) throws ServiceException {
+    public ShareholderDTO findById(Long id) {
         return null;
     }
 

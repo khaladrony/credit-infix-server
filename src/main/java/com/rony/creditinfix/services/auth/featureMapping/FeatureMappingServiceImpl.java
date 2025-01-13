@@ -24,7 +24,7 @@ public class FeatureMappingServiceImpl implements FeatureMappingService {
 
 
     @Override
-    public FeatureMappingDTO create(FeatureMappingDTO featureMappingDTO) throws ServiceException {
+    public FeatureMappingDTO create(FeatureMappingDTO featureMappingDTO) {
         FeatureMapping featureMapping = new FeatureMapping(featureMappingDTO);
 
         this.duplicateCheck(featureMappingDTO, "save");
@@ -33,7 +33,7 @@ public class FeatureMappingServiceImpl implements FeatureMappingService {
     }
 
     @Override
-    public FeatureMappingDTO update(Long id, FeatureMappingDTO featureMappingDTO) throws ServiceException {
+    public FeatureMappingDTO update(Long id, FeatureMappingDTO featureMappingDTO) {
         FeatureMappingDTO _featureMappingDTO = this.findById(id);
         if (_featureMappingDTO == null) throw new NotFoundException();
 
@@ -49,7 +49,7 @@ public class FeatureMappingServiceImpl implements FeatureMappingService {
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         FeatureMappingDTO featureMappingDTO = this.findById(id);
         if (featureMappingDTO == null) throw new NotFoundException();
 
@@ -58,7 +58,7 @@ public class FeatureMappingServiceImpl implements FeatureMappingService {
     }
 
     @Override
-    public FeatureMappingDTO findById(Long id) throws ServiceException {
+    public FeatureMappingDTO findById(Long id) {
         Optional<FeatureMapping> featureMappingData = featureMappingRepository.findById(id);
         return new FeatureMappingDTO(featureMappingData.orElse(null));
     }

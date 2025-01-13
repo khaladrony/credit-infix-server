@@ -22,7 +22,7 @@ public class CompanyInfoImpl implements CompanyInfoService {
     private CompanyInfoRepository companyInfoRepository;
 
     @Override
-    public CompanyInfoDTO create(CompanyInfoDTO companyInfoDTO) throws ServiceException {
+    public CompanyInfoDTO create(CompanyInfoDTO companyInfoDTO) {
         CompanyInfo companyInfo = new CompanyInfo(companyInfoDTO);
 
         this.duplicateCheck(companyInfoDTO, "save");
@@ -32,7 +32,7 @@ public class CompanyInfoImpl implements CompanyInfoService {
     }
 
     @Override
-    public CompanyInfoDTO update(Long id, CompanyInfoDTO companyInfoDTO) throws ServiceException {
+    public CompanyInfoDTO update(Long id, CompanyInfoDTO companyInfoDTO) {
         CompanyInfoDTO _companyInfoDTO = this.findById(id);
         if (_companyInfoDTO == null) throw new NotFoundException();
 
@@ -44,7 +44,7 @@ public class CompanyInfoImpl implements CompanyInfoService {
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         CompanyInfoDTO companyInfoDTO = this.findById(id);
         if (companyInfoDTO == null) throw new NotFoundException();
 
@@ -53,7 +53,7 @@ public class CompanyInfoImpl implements CompanyInfoService {
     }
 
     @Override
-    public CompanyInfoDTO findById(Long id) throws ServiceException {
+    public CompanyInfoDTO findById(Long id) {
         Optional<CompanyInfo> companyInfo = companyInfoRepository.findById(id);
         return companyInfo.isPresent() ? new CompanyInfoDTO(companyInfo.orElse(null)) : null;
     }

@@ -1,7 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.bankers;
 
 import com.rony.creditinfix.entity.financialInfo.Bankers;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.BankersDTO;
 import com.rony.creditinfix.repository.financialInfo.BankersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,22 +44,22 @@ public class BankersServiceImpl implements BankersService {
     }
 
     @Override
-    public BankersDTO create(BankersDTO bankersDTO) throws ServiceException {
+    public BankersDTO create(BankersDTO bankersDTO) {
         return null;
     }
 
     @Override
-    public BankersDTO update(Long id, BankersDTO bankersDTO) throws ServiceException {
+    public BankersDTO update(Long id, BankersDTO bankersDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public BankersDTO findById(Long id) throws ServiceException {
+    public BankersDTO findById(Long id) {
         return null;
     }
 

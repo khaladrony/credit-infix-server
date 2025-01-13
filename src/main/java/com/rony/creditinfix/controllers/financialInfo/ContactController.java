@@ -1,8 +1,6 @@
 package com.rony.creditinfix.controllers.financialInfo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rony.creditinfix.models.ApiResponse;
-import com.rony.creditinfix.models.financialInfo.CompanyInfoDTO;
 import com.rony.creditinfix.models.financialInfo.ContactDTO;
 import com.rony.creditinfix.services.financialInfo.contact.ContactService;
 import com.rony.creditinfix.util.General;

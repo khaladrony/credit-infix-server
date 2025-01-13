@@ -3,7 +3,6 @@ package com.rony.creditinfix.services.financialInfo.financialInformation;
 
 import com.rony.creditinfix.entity.financialInfo.FinancialInformation;
 import com.rony.creditinfix.exception.NotFoundException;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.FinancialInformationDTO;
 import com.rony.creditinfix.repository.financialInfo.FinancialInformationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +47,17 @@ public class FinancialInformationImpl implements FinancialInformationService {
     }
 
     @Override
-    public FinancialInformationDTO create(FinancialInformationDTO financialInformationDTO) throws ServiceException {
+    public FinancialInformationDTO create(FinancialInformationDTO financialInformationDTO) {
         return null;
     }
 
     @Override
-    public FinancialInformationDTO update(Long id, FinancialInformationDTO financialInformationDTO) throws ServiceException {
+    public FinancialInformationDTO update(Long id, FinancialInformationDTO financialInformationDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         FinancialInformationDTO financialInformationDTO = this.findById(id);
         if (financialInformationDTO == null) throw new NotFoundException();
 
@@ -67,7 +66,7 @@ public class FinancialInformationImpl implements FinancialInformationService {
     }
 
     @Override
-    public FinancialInformationDTO findById(Long id) throws ServiceException {
+    public FinancialInformationDTO findById(Long id) {
         Optional<FinancialInformation> financialInformation = financialInformationRepository.findById(id);
         return financialInformation.isEmpty() ? null : new FinancialInformationDTO(financialInformation.get());
     }

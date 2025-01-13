@@ -1,18 +1,17 @@
 package com.rony.creditinfix.services;
 
-import com.rony.creditinfix.exception.ServiceException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface AbstractService<T> {
-    T create(T t) throws ServiceException;
+    T create(T t);
 
-    T update(Long id, T t) throws ServiceException;
+    T update(Long id, T t);
 
-    Boolean delete(Long id) throws ServiceException;
+    Boolean delete(Long id);
 
-    T findById(Long id) throws ServiceException;
+    T findById(Long id);
 
     Page<T> findAll(int page, int size);
 

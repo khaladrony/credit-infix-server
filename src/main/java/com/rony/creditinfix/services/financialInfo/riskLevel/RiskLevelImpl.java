@@ -1,8 +1,6 @@
 package com.rony.creditinfix.services.financialInfo.riskLevel;
 
-import com.rony.creditinfix.entity.financialInfo.Rating;
 import com.rony.creditinfix.entity.financialInfo.RiskLevel;
-import com.rony.creditinfix.exception.ServiceException;
 import com.rony.creditinfix.models.financialInfo.RiskLevelDTO;
 import com.rony.creditinfix.repository.financialInfo.RiskLevelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +19,22 @@ public class RiskLevelImpl implements RiskLevelService {
 
 
     @Override
-    public RiskLevelDTO create(RiskLevelDTO riskLevelDTO) throws ServiceException {
+    public RiskLevelDTO create(RiskLevelDTO riskLevelDTO) {
         return null;
     }
 
     @Override
-    public RiskLevelDTO update(Long id, RiskLevelDTO riskLevelDTO) throws ServiceException {
+    public RiskLevelDTO update(Long id, RiskLevelDTO riskLevelDTO) {
         return null;
     }
 
     @Override
-    public Boolean delete(Long id) throws ServiceException {
+    public Boolean delete(Long id) {
         return null;
     }
 
     @Override
-    public RiskLevelDTO findById(Long id) throws ServiceException {
+    public RiskLevelDTO findById(Long id) {
         return null;
     }
 
